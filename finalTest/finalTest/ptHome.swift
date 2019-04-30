@@ -8,11 +8,26 @@
 
 import UIKit
 
-class ptHome: UIViewController {
+class ptHome: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+         return pickerData.count
+    }
+    
+    
 
+    @IBOutlet weak var picker: UIPickerView!
+    var pickerData: [String] = [String]()
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        pickerData = ["low", "med", "high"]
+        self.picker.delegate = self
+        self.picker.dataSource = self
+        
+        // Input the data into the array
         // Do any additional setup after loading the view.
     }
     

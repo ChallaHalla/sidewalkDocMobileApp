@@ -32,6 +32,9 @@ class ViewController: UIViewController {
         login(userType: "patient")
     }
     
+    @IBAction func register(_ sender: Any) {
+         self.performSegue(withIdentifier: "registerSegue", sender: self)
+    }
     func login(userType:String){
         print("Perform login here")
         let username: String = usernameInput.text!
@@ -68,7 +71,7 @@ class ViewController: UIViewController {
                         self.performSegue(withIdentifier: "providerSegue", sender: self)
                     }
                 } else{
-                    print("NUFFIN")
+                    print("incorrect credentials")
                 }
                 
             } catch let error as NSError {
