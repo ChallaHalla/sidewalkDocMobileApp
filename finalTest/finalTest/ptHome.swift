@@ -9,6 +9,8 @@
 import UIKit
 
 class ptHome: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -26,6 +28,7 @@ class ptHome: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         pickerData = ["low", "med", "high"]
         self.picker.delegate = self
         self.picker.dataSource = self
+        print(self.appDelegate.username)
         
         // Input the data into the array
         // Do any additional setup after loading the view.

@@ -10,8 +10,9 @@ import UIKit
 import Foundation
 
 class ViewController: UIViewController {
-    let endpoint = "http://192.168.1.154:3000"
+    let endpoint = "http://172.22.90.82:3000"
 
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     @IBOutlet weak var usernameInput: UITextField!
 
@@ -36,14 +37,19 @@ class ViewController: UIViewController {
          self.performSegue(withIdentifier: "registerSegue", sender: self)
     }
     func login(userType:String){
-        print("Perform login here")
+        print("Perform login heres")
         let username: String = usernameInput.text!
         let password: String = passwordInput.text!
         let urlString = endpoint+"/login"
         
      
-        let requestLang: [String: Any] = ["username": username, "password": password]
-        let requestBody = try? JSONSerialization.data(withJSONObject: requestLang)
+        var params: [String: Any] = ["username": username, "password": password]
+        if(userType == "patient"){
+            params["patient"] = "on"
+        } else{
+            params["doctor"] = "on"
+        }
+        let requestBody = try? JSONSerialization.data(withJSONObject: params)
 
         var request = URLRequest(url:URL(string: urlString)!)
         request.httpBody = requestBody
@@ -61,19 +67,20 @@ class ViewController: UIViewController {
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
                 print(json["status"]!)
-                print("logged in")
-                if(userType == "patient" && (json["status"]! as AnyObject).isEqual("cool")){
-                    DispatchQueue.main.async {
-                        self.performSegue(withIdentifier: "ptHomesegue", sender: self)
-                    }
-                } else if(userType == "provider" && (json["status"]! as AnyObject).isEqual("cool")){
-                    DispatchQueue.main.async {
-                        self.performSegue(withIdentifier: "providerSegue", sender: self)
+                if((json["status"]! as AnyObject).isEqual("success")){
+                    self.appDelegate.username = username
+                    if(userType == "patient"){
+                        DispatchQueue.main.async {
+                            self.performSegue(withIdentifier: "ptHomesegue", sender: self)
+                        }
+                    } else if(userType == "provider"){
+                        DispatchQueue.main.async {
+                            self.performSegue(withIdentifier: "providerSegue", sender: self)
+                        }
                     }
                 } else{
-                    print("incorrect credentials")
+                     print("incorrect credentials")
                 }
-                
             } catch let error as NSError {
                 print("in catch")
                 print(error)
