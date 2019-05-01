@@ -103,6 +103,11 @@ class ptHome: UIViewController, CLLocationManagerDelegate {
             }
         }).resume()
     }
+    @IBAction func tagTableView(_ sender: Any) {
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "tagSegue", sender: self)
+        }
+    }
     /*
     // MARK: - Navigation
 
