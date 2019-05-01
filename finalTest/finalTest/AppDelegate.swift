@@ -12,7 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var username: String? = nil
+    var userId: String? = nil
     let endpoint = "http://172.22.90.82:3000"
 
 

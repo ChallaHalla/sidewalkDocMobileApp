@@ -67,7 +67,7 @@ class ViewController: UIViewController {
                 let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
                 print(json["status"]!)
                 if((json["status"]! as AnyObject).isEqual("success")){
-                    self.appDelegate.username = username
+                    self.appDelegate.userId = json["userId"]! as! String
                     if(userType == "patient"){
                         DispatchQueue.main.async {
                             self.performSegue(withIdentifier: "ptHomesegue", sender: self)

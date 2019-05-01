@@ -69,7 +69,7 @@ class ptHome: UIViewController, CLLocationManagerDelegate {
     func createAlert(){
         let urlString = self.appDelegate.endpoint+"/createAlert"
         var params: [String: Any] = ["description": self.desc.text, "latitude": self.latitude, "longitude": self.longitude,
-        "username": self.appDelegate.username]
+        "userId": self.appDelegate.userId]
         
         let requestBody = try? JSONSerialization.data(withJSONObject: params)
         

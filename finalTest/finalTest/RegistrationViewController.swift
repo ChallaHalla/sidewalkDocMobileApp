@@ -35,14 +35,18 @@ class RegistrationViewController: UIViewController {
         register(userType: userType.currentTitle!)
     }
     func register(userType:String){
-        print("Perform login here")
         let username: String = usernameInput.text!
         let password: String = passwordInput.text!
         let name: String = nameInput.text!
         let urlString = self.appDelegate.endpoint+"/register"
         
         
-        let params: [String: Any] = ["username": username, "password": password, "name": name]
+        var params: [String: Any] = ["username": username, "password": password, "name": name]
+        if(userType == "doctor"){
+            params["doctor"] = "on"
+        } else if(userType ==  "patient"){
+            params["patient"] = "on"
+        }
 //        add location info here
         
         let requestBody = try? JSONSerialization.data(withJSONObject: params)
@@ -64,18 +68,22 @@ class RegistrationViewController: UIViewController {
                 let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
                 print(json["status"]!)
                 print("logged in")
-                if(userType == "patient" && (json["status"]! as AnyObject).isEqual("account created")){
-                    DispatchQueue.main.async {
-                        self.performSegue(withIdentifier: "regToPatientSegue", sender: self)
-                    }
-                } else if(userType == "provider" && (json["status"]! as AnyObject).isEqual("account created")){
-                    DispatchQueue.main.async {
-                        self.performSegue(withIdentifier: "regToDoctorSegue", sender: self)
+                print(json["status"]!);
+                if((json["status"]! as AnyObject).isEqual("account created")){
+                    self.appDelegate.userId = json["userId"]! as! String
+                    if(userType == "patient"){
+                        DispatchQueue.main.async {
+                            self.performSegue(withIdentifier: "regToPatientSegue", sender: self)
+                        }
+                        
+                    } else if(userType == "doctor"){
+                        DispatchQueue.main.async {
+                            self.performSegue(withIdentifier: "regToDoctorSegue", sender: self)
+                        }
                     }
                 } else{
                     print("a problem occured")
                 }
-                
             } catch let error as NSError {
                 print("in catch")
                 print(error)
