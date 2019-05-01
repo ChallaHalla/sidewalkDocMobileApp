@@ -10,8 +10,7 @@ import UIKit
 import Foundation
 
 class ViewController: UIViewController {
-    let endpoint = "http://172.22.90.82:3000"
-
+    
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     @IBOutlet weak var usernameInput: UITextField!
@@ -40,7 +39,7 @@ class ViewController: UIViewController {
         print("Perform login heres")
         let username: String = usernameInput.text!
         let password: String = passwordInput.text!
-        let urlString = endpoint+"/login"
+        let urlString = self.appDelegate.endpoint+"/login"
         
      
         var params: [String: Any] = ["username": username, "password": password]

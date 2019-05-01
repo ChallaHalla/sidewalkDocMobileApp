@@ -9,14 +9,13 @@
 import UIKit
 
 class RegistrationViewController: UIViewController {
-    let endpoint = "http://192.168.1.154:3000"
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
     @IBOutlet weak var usernameInput: UITextField!
     @IBOutlet weak var passwordInput: UITextField!
     @IBOutlet weak var nameInput: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
     
@@ -40,7 +39,7 @@ class RegistrationViewController: UIViewController {
         let username: String = usernameInput.text!
         let password: String = passwordInput.text!
         let name: String = nameInput.text!
-        let urlString = endpoint+"/register"
+        let urlString = self.appDelegate.endpoint+"/register"
         
         
         let params: [String: Any] = ["username": username, "password": password, "name": name]
