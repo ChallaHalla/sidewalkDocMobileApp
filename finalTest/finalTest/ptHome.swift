@@ -9,8 +9,49 @@
 import UIKit
 import CoreLocation
 
-class ptHome: UIViewController, CLLocationManagerDelegate {
-  
+class ptHome: UIViewController, UITableViewDataSource, CLLocationManagerDelegate, UITableViewDelegate {
+    
+    let tags = ["Faint/no heartbeat", "Broken appendage", "Not breathing", "Heart attack", "Stroke", "Allergic reaction", "Car accident", "Fainting", "Heat stroke"]
+    
+    // selectedTags holds all the tags the user selects - this needs to be added to the alert
+    var selectedTags: [String] = []
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tags.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellReuseIdentifier")! //1.
+        
+        let text = tags[indexPath.row] //2.
+        
+        cell.textLabel?.text = text //3.
+        
+        return cell //4.
+    }
+    
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        if tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCell.AccessoryType.checkmark
+        {
+            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.none
+            
+            if let index = selectedTags.index(of: tags[indexPath.row]) {
+                selectedTags.remove(at: index)
+            }
+        }
+        else{
+            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
+            selectedTags.append(tags[indexPath.row])
+        }
+    }
+    
+    
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     let locationManager = CLLocationManager();
@@ -18,6 +59,7 @@ class ptHome: UIViewController, CLLocationManagerDelegate {
     var longitude = 0.0;
 
     
+
     @IBOutlet weak var desc: UITextView!
     
     override func viewDidLoad() {
@@ -32,6 +74,10 @@ class ptHome: UIViewController, CLLocationManagerDelegate {
         }
         // Input the data into the array
         // Do any additional setup after loading the view.
+    
+        
+        tableView.dataSource = self
+        tableView.delegate = self
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -61,6 +107,9 @@ class ptHome: UIViewController, CLLocationManagerDelegate {
     @IBAction func cancelButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
+    
+    @IBOutlet weak var tableView: UITableView!
     
     @IBAction func alertCreation(_ sender: Any) {
         createAlert()

@@ -8,20 +8,61 @@
 
 import UIKit
 
-class RegistrationViewController: UIViewController {
+class RegistrationViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-
+    
+    var registrationType = "provider"
+    
     @IBOutlet weak var usernameInput: UITextField!
     @IBOutlet weak var passwordInput: UITextField!
     @IBOutlet weak var nameInput: UITextField!
+    @IBOutlet weak var userType: UIButton!
+    
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var picker: UIPickerView!
+    var pickerData: [String] = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        self.picker.delegate = self
+        self.picker.dataSource = self
+        
+        pickerData = ["Internal Medicine", "Pediatrics", "Ob/Gyn", "Surgery", "Dermatology", "Emergency Medicine"]
+        
     }
     
-
-    @IBOutlet weak var userType: UIButton!
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
     
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    // Call this function to return the selected specialty
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerData[row]
+    }
+    
+    
+    @IBAction func indexChanged(_ sender: Any) {
+        
+        switch segmentedControl.selectedSegmentIndex
+        {
+        case 0:
+            registrationType = "provider"
+            picker.isHidden = false;
+        case 1:
+            registrationType = "patient"
+            // hide picker
+            picker.isHidden = true;
+        default:
+            break
+        }
+    }
     
     @IBAction func userTypeClick(_ sender: Any) {
         if(userType.currentTitle! == "doctor"){
@@ -32,7 +73,7 @@ class RegistrationViewController: UIViewController {
     }
     
     @IBAction func createAccount(_ sender: Any) {
-        register(userType: userType.currentTitle!)
+        register(userType: registrationType)
     }
     func register(userType:String){
         let username: String = usernameInput.text!
@@ -42,9 +83,9 @@ class RegistrationViewController: UIViewController {
         
         
         var params: [String: Any] = ["username": username, "password": password, "name": name]
-        if(userType == "doctor"){
+        if(userType == "provider"){
             params["doctor"] = "on"
-        } else if(userType ==  "patient"){
+        } else if(userType == "patient"){
             params["patient"] = "on"
         }
 //        add location info here
@@ -76,7 +117,7 @@ class RegistrationViewController: UIViewController {
                             self.performSegue(withIdentifier: "regToPatientSegue", sender: self)
                         }
                         
-                    } else if(userType == "doctor"){
+                    } else if(userType == "provider"){
                         DispatchQueue.main.async {
                             self.performSegue(withIdentifier: "regToDoctorSegue", sender: self)
                         }
