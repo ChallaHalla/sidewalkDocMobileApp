@@ -82,6 +82,7 @@ class FindAlertsViewController: UIViewController, CLLocationManagerDelegate {
                 print(json["status"]!)
                 if((json["status"]! as AnyObject).isEqual("success")){
                     print("succeeded");
+                    print(json["alerts"]!)
                 } else{
                     print("incorrect credentials")
                 }
