@@ -20,7 +20,10 @@ class RegistrationViewController: UIViewController, UIPickerViewDelegate, UIPick
     @IBOutlet weak var userType: UIButton!
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
+    
     @IBOutlet weak var picker: UIPickerView!
+    
     var pickerData: [String] = [String]()
     
     override func viewDidLoad() {

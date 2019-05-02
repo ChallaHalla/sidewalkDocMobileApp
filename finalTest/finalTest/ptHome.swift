@@ -104,10 +104,10 @@ class ptHome: UIViewController, UITableViewDataSource, CLLocationManagerDelegate
         
     }
     
+    
     @IBAction func cancelButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -152,11 +152,7 @@ class ptHome: UIViewController, UITableViewDataSource, CLLocationManagerDelegate
             }
         }).resume()
     }
-    @IBAction func tagTableView(_ sender: Any) {
-        DispatchQueue.main.async {
-            self.performSegue(withIdentifier: "tagSegue", sender: self)
-        }
-    }
+
     /*
     // MARK: - Navigation
 
