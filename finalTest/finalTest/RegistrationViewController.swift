@@ -135,7 +135,6 @@ class RegistrationViewController: UIViewController, UIPickerViewDelegate, UIPick
         }).resume()
         
     }
-    
     /*
     // MARK: - Navigation
 

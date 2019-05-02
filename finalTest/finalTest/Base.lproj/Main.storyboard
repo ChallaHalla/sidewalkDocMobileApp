@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -401,16 +401,16 @@
             </objects>
             <point key="canvasLocation" x="-210" y="-895"/>
         </scene>
-        <!--View Controller-->
+        <!--Find Alerts View Controller-->
         <scene sceneID="bVy-m7-Wwo">
             <objects>
-                <viewController id="ROe-bD-eNC" sceneMemberID="viewController">
+                <viewController id="ROe-bD-eNC" customClass="FindAlertsViewController" customModule="finalTest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tzx-P4-l0a">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Active Alerts" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aA3-sH-Jb0">
-                                <rect key="frame" x="105" y="100" width="205" height="108"/>
+                                <rect key="frame" x="105" y="79" width="205" height="108"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <color key="textColor" red="0.3204115971" green="0.0" blue="0.1003348729" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -423,6 +423,15 @@
                                 <state key="normal" title="Done"/>
                                 <connections>
                                     <action selector="cancelButton:" destination="lZx-Gx-kyG" eventType="touchUpInside" id="8RQ-DM-A6n"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uvW-yT-8r1">
+                                <rect key="frame" x="149" y="703" width="97" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="get alerts"/>
+                                <connections>
+                                    <action selector="getAlertsButton:" destination="ROe-bD-eNC" eventType="touchUpInside" id="dd4-Wx-MWj"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -511,7 +520,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Screen Shot 2019-04-03 at 12.29.52 PM" width="956" height="980"/>
+        <image name="Screen Shot 2019-04-03 at 12.29.52 PM" width="478" height="490"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Pma-dC-j5l"/>
