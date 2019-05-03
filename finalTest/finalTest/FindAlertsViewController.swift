@@ -23,10 +23,18 @@ class FindAlertsViewController: UIViewController, UITableViewDataSource, CLLocat
     
     
     
-    var alertTable = ["Alert 1", "Alert 2", "Alert 3"]
+    var alertTable = ["Alert1","Alert2"]
+    
     
     // selectedAlert holds the selected string from alertTable
     var selectedAlert = -1
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let alertView = segue.destination as? AlertInfoViewController {
+            alertView.alert = alerts[selectedAlert]
+            alertView.doctorLocation = CLLocation(latitude: self.latitude, longitude: self.longitude)
+        }
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return alertTable.count
@@ -50,8 +58,9 @@ class FindAlertsViewController: UIViewController, UITableViewDataSource, CLLocat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         selectedAlert = indexPath.row
+        print(selectedAlert)
         
-        //performSegue(withIdentifier: "alertInfoSegue", sender: self)
+        performSegue(withIdentifier: "alertInfoSegue", sender: self)
     }
 
     override func viewDidLoad() {
@@ -124,19 +133,13 @@ class FindAlertsViewController: UIViewController, UITableViewDataSource, CLLocat
                 if((json["status"]! as AnyObject).isEqual("success")){
                     self.alerts = json["alerts"] as! [[String:Any]]
                     print(self.alerts.count)
-                    var yPos = 200
+                    self.alertTable = []
                     for i in 0..<(self.alerts.count){
                         var alert = self.alerts[i]
-                        DispatchQueue.main.async {
-                            let label = UIButton()
-                            label.setTitleColor(UIColor.black, for: .normal)
-                            label.setTitle(alert["description"] as! String, for: .normal)
-                            label.tag = i
-                            label.frame = CGRect(x: 100, y: yPos, width: 300, height: 30)
-                            label.addTarget(self, action:#selector(self.selectAlert), for: .touchUpInside)
-                            self.view.addSubview(label)
-                            yPos += 50
-                        }
+                        self.alertTable.append(alert["description"] as! String)
+                    }
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
                     }
                 } else{
                     print("incorrect credentials")
