@@ -9,7 +9,10 @@
 import UIKit
 import CoreLocation
 
-class FindAlertsViewController: UIViewController, CLLocationManagerDelegate {
+class FindAlertsViewController: UIViewController, UITableViewDataSource, CLLocationManagerDelegate, UITableViewDelegate {
+    
+    @IBOutlet weak var tableView: UITableView!
+    
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
@@ -17,6 +20,40 @@ class FindAlertsViewController: UIViewController, CLLocationManagerDelegate {
     var latitude = 0.0;
     var longitude = 0.0;
     var alerts:[[String:Any]] = []
+    
+    
+    
+    var alertTable = ["Alert 1", "Alert 2", "Alert 3"]
+    
+    // selectedAlert holds the selected string from alertTable
+    var selectedAlert = ""
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return alertTable.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellReuseIdentifier")! //1.
+        
+        let text = alertTable[indexPath.row] //2.
+        
+        cell.textLabel?.text = text //3.
+        
+        return cell //4.
+    }
+    
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        selectedAlert = alertTable[indexPath.row]
+        
+        
+        //performSegue(withIdentifier: "alertInfoSegue", sender: self)
+    }
 
     override func viewDidLoad() {
         
@@ -39,6 +76,9 @@ class FindAlertsViewController: UIViewController, CLLocationManagerDelegate {
         
 
         // Do any additional setup after loading the view.
+        
+        tableView.dataSource = self
+        tableView.delegate = self
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
