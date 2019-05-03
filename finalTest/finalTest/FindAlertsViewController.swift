@@ -26,7 +26,7 @@ class FindAlertsViewController: UIViewController, UITableViewDataSource, CLLocat
     var alertTable = ["Alert 1", "Alert 2", "Alert 3"]
     
     // selectedAlert holds the selected string from alertTable
-    var selectedAlert = ""
+    var selectedAlert = -1
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return alertTable.count
@@ -49,8 +49,7 @@ class FindAlertsViewController: UIViewController, UITableViewDataSource, CLLocat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        selectedAlert = alertTable[indexPath.row]
-        
+        selectedAlert = indexPath.row
         
         //performSegue(withIdentifier: "alertInfoSegue", sender: self)
     }
@@ -134,7 +133,7 @@ class FindAlertsViewController: UIViewController, UITableViewDataSource, CLLocat
                             label.setTitle(alert["description"] as! String, for: .normal)
                             label.tag = i
                             label.frame = CGRect(x: 100, y: yPos, width: 300, height: 30)
-                            label.addTarget(label, action: Selector("selectAlert"), for: .touchUpInside)
+                            label.addTarget(self, action:#selector(self.selectAlert), for: .touchUpInside)
                             self.view.addSubview(label)
                             yPos += 50
                         }
@@ -155,41 +154,41 @@ class FindAlertsViewController: UIViewController, UITableViewDataSource, CLLocat
         getalerts();
     }
     
-    func selectAlert(_ sender:UIButton!){
+     @IBAction func selectAlert(_ sender:UIButton!){
         print("HERE in select alert")
-//        let alertIndex = sender.tag
-//        let urlString = self.appDelegate.endpoint+"/respondToAlert"
-//        let alert = self.alerts[alertIndex]
-//        var params: [String: Any] = ["alertId": alert["_id"]]
-//        let requestBody = try? JSONSerialization.data(withJSONObject: params)
-//        
-//        var request = URLRequest(url:URL(string: urlString)!)
-//        
-//        request.httpBody = requestBody
-//        request.httpMethod = "POST"
-//        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-//        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Accept")
-//        
-//        URLSession.shared.dataTask(with:request, completionHandler: {(data, response, error) in
-//            guard let data = data, error == nil else {
-//                print("in guard")
-//                return
-//            }
-//            do {
-//                print("entered");
-//                let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
-//                
-//                if((json["status"]! as AnyObject).isEqual("success")){
-//                    print("alert accepted!")
-//                } else{
-//                    print("something went wrong credentials")
-//                }
-//                
-//            } catch let error as NSError {
-//                print("in catch")
-//                print(error)
-//            }
-//        }).resume()
+        let alertIndex = sender.tag
+        let urlString = self.appDelegate.endpoint+"/respondToAlert"
+        let alert = self.alerts[alertIndex]
+        var params: [String: Any] = ["alertId": alert["_id"]]
+        let requestBody = try? JSONSerialization.data(withJSONObject: params)
+        
+        var request = URLRequest(url:URL(string: urlString)!)
+        
+        request.httpBody = requestBody
+        request.httpMethod = "POST"
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Accept")
+        
+        URLSession.shared.dataTask(with:request, completionHandler: {(data, response, error) in
+            guard let data = data, error == nil else {
+                print("in guard")
+                return
+            }
+            do {
+                print("entered");
+                let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
+                
+                if((json["status"]! as AnyObject).isEqual("success")){
+                    print("alert accepted!")
+                } else{
+                    print("something went wrong credentials")
+                }
+                
+            } catch let error as NSError {
+                print("in catch")
+                print(error)
+            }
+        }).resume()
         
     }
     /*
