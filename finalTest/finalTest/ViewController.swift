@@ -16,23 +16,35 @@ class ViewController: UIViewController {
     @IBOutlet weak var usernameInput: UITextField!
 
     @IBOutlet weak var passwordInput: UITextField!
+    
+    @IBOutlet weak var loginHeader: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.hideKeyboardWhenTappedAround()
         
-        
+        self.appDelegate.checkCredentials = -1
     }
     
     
     @IBAction func providerEnter(_ sender: Any) {
         login(userType: "provider")
 //        self.performSegue(withIdentifier: "providerSegue", sender: self)
+        
+        if self.appDelegate.checkCredentials == 1{
+            self.loginHeader.text = "Invalid credentials. Try again"
+        }
 
     }
     
     @IBAction func patientEnter(_ sender: Any) {
         login(userType: "patient")
+        
+        if self.appDelegate.checkCredentials == 1{
+            self.loginHeader.text = "Invalid credentials. Try again"
+        }
     }
     
     @IBAction func register(_ sender: Any) {
@@ -81,7 +93,9 @@ class ViewController: UIViewController {
                         }
                     }
                 } else{
-                     print("incorrect credentials")
+                    print("incorrect credentials")
+                    self.appDelegate.checkCredentials = 1
+                    
                 }
             } catch let error as NSError {
                 print("in catch")

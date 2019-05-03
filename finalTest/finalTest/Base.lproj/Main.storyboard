@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ROe-bD-eNC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -33,7 +33,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="I am a: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LNb-yy-gZW">
-                                <rect key="frame" x="105" y="523" width="205" height="108"/>
+                                <rect key="frame" x="105" y="585" width="205" height="108"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <color key="textColor" red="0.3204115971" green="0.0" blue="0.1003348729" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -68,7 +68,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gjI-H6-goh">
-                                <rect key="frame" x="241" y="622" width="92" height="49"/>
+                                <rect key="frame" x="241" y="684" width="92" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="31"/>
                                 <state key="normal" title="Patient"/>
@@ -77,7 +77,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g2w-aC-x8e">
-                                <rect key="frame" x="81" y="622" width="110" height="49"/>
+                                <rect key="frame" x="81" y="684" width="110" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="31"/>
                                 <state key="normal" title="Provider"/>
@@ -86,7 +86,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uhi-lb-TsA">
-                                <rect key="frame" x="118" y="752" width="179" height="49"/>
+                                <rect key="frame" x="118" y="766" width="179" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="31"/>
                                 <state key="normal" title="New Account"/>
@@ -94,11 +94,19 @@
                                     <action selector="register:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cBf-ZR-P4O"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qa5-94-9Ps">
+                                <rect key="frame" x="60" y="458" width="289" height="137"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <color key="textColor" red="0.3204115971" green="0.0" blue="0.1003348729" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.64183733419736444" blue="0.42885445855322735" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="loginHeader" destination="qa5-94-9Ps" id="vfU-jM-5TE"/>
                         <outlet property="passwordInput" destination="wg4-uk-7w3" id="YjP-xe-OeU"/>
                         <outlet property="usernameInput" destination="Y5f-Bl-yZE" id="2dD-0j-XbT"/>
                         <segue destination="lZx-Gx-kyG" kind="presentation" identifier="ptHomesegue" id="fVw-J8-MAt"/>
@@ -345,11 +353,11 @@
                                 </connections>
                             </button>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5n1-fW-IeI">
-                                <rect key="frame" x="0.0" y="451" width="414" height="216"/>
+                                <rect key="frame" x="-7" y="483" width="414" height="216"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </pickerView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="FRh-dy-YHj">
-                                <rect key="frame" x="80" y="675" width="254" height="29"/>
+                                <rect key="frame" x="80" y="707" width="254" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="Provider"/>
@@ -359,6 +367,13 @@
                                     <action selector="indexChanged:" destination="g2o-v9-Mkr" eventType="valueChanged" id="aHp-Zq-TS4"/>
                                 </connections>
                             </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HbZ-v2-VD6">
+                                <rect key="frame" x="60" y="438" width="289" height="68"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <color key="textColor" red="0.3204115971" green="0.0" blue="0.1003348729" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="f6d-4g-OgZ"/>
@@ -367,6 +382,7 @@
                         <outlet property="nameInput" destination="s1e-gZ-wvg" id="6R7-xA-0YM"/>
                         <outlet property="passwordInput" destination="x3L-pO-qWd" id="aco-RT-Rww"/>
                         <outlet property="picker" destination="5n1-fW-IeI" id="Ju8-ea-ai2"/>
+                        <outlet property="registerHeader" destination="HbZ-v2-VD6" id="btP-0s-4Wu"/>
                         <outlet property="segmentedControl" destination="FRh-dy-YHj" id="Wc0-jf-Vak"/>
                         <outlet property="usernameInput" destination="EAT-Rp-Tsa" id="wJa-ED-H7f"/>
                         <segue destination="ROe-bD-eNC" kind="presentation" identifier="regToDoctorSegue" id="Pma-dC-j5l"/>

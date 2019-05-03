@@ -21,6 +21,7 @@ class RegistrationViewController: UIViewController, UIPickerViewDelegate, UIPick
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
+    @IBOutlet weak var registerHeader: UILabel!
     
     @IBOutlet weak var picker: UIPickerView!
     
@@ -34,6 +35,8 @@ class RegistrationViewController: UIViewController, UIPickerViewDelegate, UIPick
         self.picker.dataSource = self
         
         pickerData = ["Internal Medicine", "Pediatrics", "Ob/Gyn", "Surgery", "Dermatology", "Emergency Medicine"]
+        
+        self.appDelegate.checkAccounts = -1
         
     }
     
@@ -77,7 +80,12 @@ class RegistrationViewController: UIViewController, UIPickerViewDelegate, UIPick
     
     @IBAction func createAccount(_ sender: Any) {
         register(userType: registrationType)
+        
+        if self.appDelegate.checkAccounts == 1{
+            self.registerHeader.text = "A problem ocurred. Try again"
+        }
     }
+    
     func register(userType:String){
         let username: String = usernameInput.text!
         let password: String = passwordInput.text!
@@ -127,6 +135,8 @@ class RegistrationViewController: UIViewController, UIPickerViewDelegate, UIPick
                     }
                 } else{
                     print("a problem occured")
+                    
+                    self.appDelegate.checkAccounts = 1
                 }
             } catch let error as NSError {
                 print("in catch")

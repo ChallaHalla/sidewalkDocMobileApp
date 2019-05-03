@@ -13,7 +13,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var userId: String? = nil
-    let endpoint = "http://192.168.1.154:3000"
+    let endpoint = "http://192.168.0.193:3000"
+    
+    var checkCredentials = -1
+    var checkAccounts = -1
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
