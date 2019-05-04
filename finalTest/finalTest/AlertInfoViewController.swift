@@ -66,8 +66,8 @@ class AlertInfoViewController: UIViewController, CLLocationManagerDelegate {
         let alertLoc2D = alertLocation.coordinate;
         // find distance between doctor and given alert location to establish regionRadius
         let distanceBetweenCoordinates = alertLocation.distance(from: doctorLocation);
-        // set zoom distance to max of 100m and one computed above (don't want to zoom in too close as doctor approaches)
-        let regionRadius = max(distanceBetweenCoordinates, 100);
+        // set zoom distance to max of 100m and one computed above (plus a bit so markers are not right on the edge)
+        let regionRadius = max(distanceBetweenCoordinates*1.1, 100);
         
         // update marker position to given alert coordinates
         alertMarker.coordinate = CLLocationCoordinate2D(latitude: alertLocation.coordinate.latitude, longitude: alertLocation.coordinate.longitude);
