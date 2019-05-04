@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -476,10 +476,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Screen Shot 2019-04-03 at 12.29.52 PM" translatesAutoresizingMaskIntoConstraints="NO" id="LFr-nR-9QT">
-                                <rect key="frame" x="-32" y="294" width="480" height="324"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Mb-VF-lkC">
                                 <rect key="frame" x="219" y="220" width="37" height="47"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -527,6 +523,10 @@
                                 <color key="textColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="M7k-9m-Nbw">
+                                <rect key="frame" x="0.0" y="275" width="414" height="369"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" red="0.99953407049999998" green="0.98835557699999999" blue="0.47265523669999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="TFv-P4-K6k"/>
@@ -534,6 +534,7 @@
                     <connections>
                         <outlet property="descriptionText" destination="3Hp-ZP-dzP" id="DWF-WG-DzP"/>
                         <outlet property="distance" destination="NVY-Br-vL4" id="VSR-zP-8J9"/>
+                        <outlet property="mapView" destination="M7k-9m-Nbw" id="g1Y-wD-KO8"/>
                         <outlet property="symptoms" destination="S5a-Nb-75x" id="NGs-zp-vBn"/>
                     </connections>
                 </viewController>
@@ -542,11 +543,7 @@
             <point key="canvasLocation" x="1779.7101449275365" y="-245.08928571428569"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Screen Shot 2019-04-03 at 12.29.52 PM" width="956" height="980"/>
-    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2YR-Al-Yvg"/>
         <segue reference="7hf-lV-Sxh"/>
         <segue reference="fVw-J8-MAt"/>
     </inferredMetricsTieBreakers>
