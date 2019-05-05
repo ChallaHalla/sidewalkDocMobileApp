@@ -39,7 +39,8 @@ class AlertInfoViewController: UIViewController, CLLocationManagerDelegate {
         let tagsArr = self.alert["tags"] as? [String]
         self.symptoms.text = tagsArr!.joined(separator:", ")
         self.alertLocation = CLLocation(latitude: self.alert["latitude"] as! CLLocationDegrees, longitude:self.alert["longitude"] as! CLLocationDegrees)
-        self.distance.text = String(format:"%f", doctorLocation.distance(from: alertLocation))
+//        distance converted to miles
+        self.distance.text = String(format:"%.2f", doctorLocation.distance(from: alertLocation)*0.00062137) + " miles"
         
         // not sure if this view needs to request location permissions again? leaving it out for now.
         

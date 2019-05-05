@@ -11,10 +11,15 @@ import CoreLocation
 
 class ptHome: UIViewController, UITableViewDataSource, CLLocationManagerDelegate, UITableViewDelegate {
     
+    var alert: [String:Any] = [:]
     let tags = ["Faint/no heartbeat", "Broken appendage", "Not breathing", "Heart attack", "Stroke", "Allergic reaction", "Car accident", "Fainting", "Heat stroke"]
-    
     // selectedTags holds all the tags the user selects - this needs to be added to the alert
     var selectedTags: [String] = []
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let alertView = segue.destination as? PairAlertViewController {
+            alertView.alert = self.alert
+        }
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tags.count
@@ -141,6 +146,7 @@ class ptHome: UIViewController, UITableViewDataSource, CLLocationManagerDelegate
                 let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
                 
                 if((json["status"]! as AnyObject).isEqual("success")){
+                    self.alert = (json["alert"] as? [String:Any])!
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "alertWaitSegue", sender: self)
                     }

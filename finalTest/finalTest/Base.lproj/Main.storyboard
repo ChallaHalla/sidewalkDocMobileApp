@@ -228,15 +228,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="log-XA-x9p"/>
                     </view>
+                    <connections>
+                        <segue destination="Uaj-Nh-QHo" kind="presentation" identifier="doctorPairedSegue" id="7ve-2n-YNm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GJj-dm-oBb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1455.072463768116" y="456.69642857142856"/>
         </scene>
-        <!--View Controller-->
+        <!--Patient Alert View Controller-->
         <scene sceneID="fTq-Vn-WXD">
             <objects>
-                <viewController id="Uaj-Nh-QHo" sceneMemberID="viewController">
+                <viewController id="Uaj-Nh-QHo" customClass="PatientAlertViewController" customModule="finalTest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SZx-49-KVq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -400,15 +403,6 @@
                                 <color key="textColor" red="0.3204115971" green="0.0" blue="0.1003348729" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tdV-zA-0vY">
-                                <rect key="frame" x="180" y="763" width="54" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <state key="normal" title="Done"/>
-                                <connections>
-                                    <action selector="cancelButton:" destination="lZx-Gx-kyG" eventType="touchUpInside" id="8RQ-DM-A6n"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uvW-yT-8r1">
                                 <rect key="frame" x="159" y="714" width="97" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -514,17 +508,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NVY-Br-vL4">
-                                <rect key="frame" x="214" y="101" width="180" height="29"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="M7k-9m-Nbw">
+                                <rect key="frame" x="0.0" y="275" width="414" height="369"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NVY-Br-vL4">
+                                <rect key="frame" x="228" y="101" width="180" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" red="0.58072251080000004" green="0.066734083" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="M7k-9m-Nbw">
-                                <rect key="frame" x="0.0" y="275" width="414" height="369"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </mapView>
                         </subviews>
                         <color key="backgroundColor" red="0.99953407049999998" green="0.98835557699999999" blue="0.47265523669999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="TFv-P4-K6k"/>
@@ -602,11 +596,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fkP-O1-vEx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2485.507246376812" y="-230.35714285714283"/>
+            <point key="canvasLocation" x="2664" y="-242"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="e8f-Zd-6hP"/>
-        <segue reference="fVw-J8-MAt"/>
+        <segue reference="7hf-lV-Sxh"/>
+        <segue reference="jg8-65-Uum"/>
     </inferredMetricsTieBreakers>
 </document>
