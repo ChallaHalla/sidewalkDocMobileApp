@@ -42,11 +42,12 @@ class FindAlertsViewController: UIViewController, UITableViewDataSource, CLLocat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellReuseIdentifier")! //1.
-        
-        let text = alertTable[indexPath.row] //2.
-        
-        cell.textLabel?.text = text //3.
-        
+        if(indexPath.row <= alertTable.count){//
+            let text = alertTable[indexPath.row] //2.
+            
+            cell.textLabel?.text = text //3.
+        }
+//
         return cell //4.
     }
     

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		921FBA142278B30E003791C8 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921FBA132278B30E003791C8 /* RegistrationViewController.swift */; };
+		92FBDC1C227BF1EF00000E2E /* FindAlertsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FBDC1B227BF1EE00000E2E /* FindAlertsViewController.swift */; };
+		92FBDC1E227BF86900000E2E /* AlertInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FBDC1D227BF86900000E2E /* AlertInfoViewController.swift */; };
 		B70597462255112300AE1386 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70597452255112300AE1386 /* AppDelegate.swift */; };
 		B70597482255112300AE1386 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70597472255112300AE1386 /* ViewController.swift */; };
 		B705974B2255112300AE1386 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B70597492255112300AE1386 /* Main.storyboard */; };
@@ -38,6 +40,8 @@
 
 /* Begin PBXFileReference section */
 		921FBA132278B30E003791C8 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		92FBDC1B227BF1EE00000E2E /* FindAlertsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindAlertsViewController.swift; sourceTree = "<group>"; };
+		92FBDC1D227BF86900000E2E /* AlertInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertInfoViewController.swift; sourceTree = "<group>"; };
 		B70597422255112300AE1386 /* finalTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = finalTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B70597452255112300AE1386 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B70597472255112300AE1386 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -107,11 +111,13 @@
 				B70597472255112300AE1386 /* ViewController.swift */,
 				B70597492255112300AE1386 /* Main.storyboard */,
 				B728B85822776105001ADE4D /* PairAlertViewController.swift */,
+				92FBDC1D227BF86900000E2E /* AlertInfoViewController.swift */,
 				B705974C2255112B00AE1386 /* Assets.xcassets */,
 				B705974E2255112B00AE1386 /* LaunchScreen.storyboard */,
 				B70597512255112B00AE1386 /* Info.plist */,
 				B7DE95BB2270EBD100141783 /* ptHome.swift */,
 				921FBA132278B30E003791C8 /* RegistrationViewController.swift */,
+				92FBDC1B227BF1EE00000E2E /* FindAlertsViewController.swift */,
 			);
 			path = finalTest;
 			sourceTree = "<group>";
@@ -265,7 +271,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92FBDC1C227BF1EF00000E2E /* FindAlertsViewController.swift in Sources */,
 				B7DE95BC2270EBD100141783 /* ptHome.swift in Sources */,
+				92FBDC1E227BF86900000E2E /* AlertInfoViewController.swift in Sources */,
 				B70597482255112300AE1386 /* ViewController.swift in Sources */,
 				B70597462255112300AE1386 /* AppDelegate.swift in Sources */,
 				B728B85922776105001ADE4D /* PairAlertViewController.swift in Sources */,

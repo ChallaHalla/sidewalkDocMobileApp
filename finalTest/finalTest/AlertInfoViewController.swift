@@ -11,6 +11,9 @@ import CoreLocation
 import MapKit
 
 class AlertInfoViewController: UIViewController, CLLocationManagerDelegate {
+    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     var alert: [String:Any] = [:]
     var alertLocation: CLLocation = CLLocation(latitude: 0, longitude: 0)
     var doctorLocation: CLLocation = CLLocation(latitude: 0, longitude: 0)
@@ -89,6 +92,67 @@ class AlertInfoViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
+    @IBAction func acceptAlert(_ sender: Any) {
+        respondToAlert()
+    }
+    
+    func respondToAlert(){
+        
+        print("trying to respond")
+        print(self.alert["_id"])
+        let urlString = self.appDelegate.endpoint+"/respondToAlert"
+        
+        
+        var params: [String: Any] = ["doctorId": self.appDelegate.userId as? String ,"alertId":self.alert["_id"]]
+        
+        let requestBody = try? JSONSerialization.data(withJSONObject: params)
+        
+        var request = URLRequest(url:URL(string: urlString)!)
+        request.httpBody = requestBody
+        request.httpMethod = "POST"
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Accept")
+        
+        
+        URLSession.shared.dataTask(with:request, completionHandler: {(data, response, error) in
+            guard let data = data, error == nil else {
+                print("in guard")
+                return
+            }
+            
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
+                print(json["status"]!)
+                if((json["status"]! as AnyObject).isEqual("success")){
+                    print("back here")
+                    
+                    
+                    if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!))
+                    {
+                        UIApplication.shared.openURL(NSURL(string:
+                            "comgooglemaps://?saddr=&daddr=\(Float(self.alert["latitude"] as! CLLocationDegrees)),\(Float(self.alert["latitude"] as! CLLocationDegrees))&directionsmode=driving")! as URL)
+                    } else
+                    {
+                        NSLog("Can't use com.google.maps://");
+                        self.openTrackerInBrowser()
+                    }
+                    
+                    
+                } else{
+                    print("something went wrong")
+                }
+            } catch let error as NSError {
+                print("in catch")
+                print(error)
+            }
+        }).resume()
+        
+    }
+    func openTrackerInBrowser(){
+        if let urlDestination = URL.init(string: "https://www.google.com/maps/dir/?saddr=&daddr=\(Float(self.alert["latitude"] as! CLLocationDegrees)),\(Float(self.alert["longitude"] as! CLLocationDegrees))&directionsmode=driving") {
+            UIApplication.shared.openURL(urlDestination)
+        }
+    }
     /*
     // MARK: - Navigation
 
