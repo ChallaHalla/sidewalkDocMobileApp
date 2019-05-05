@@ -26,10 +26,18 @@ class AlertInfoViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var symptoms: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let alertView = segue.destination as? ResolveAlertViewController {
+            alertView.alert = self.alert
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.descriptionText.text = self.alert["description"] as! String;
+        let tagsArr = self.alert["tags"] as? [String]
+        self.symptoms.text = tagsArr!.joined(separator:", ")
         self.alertLocation = CLLocation(latitude: self.alert["latitude"] as! CLLocationDegrees, longitude:self.alert["longitude"] as! CLLocationDegrees)
         self.distance.text = String(format:"%f", doctorLocation.distance(from: alertLocation))
         
@@ -96,6 +104,11 @@ class AlertInfoViewController: UIViewController, CLLocationManagerDelegate {
         respondToAlert()
     }
     
+    @IBAction func rejectAlert(_ sender: Any) {
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "infoToFindAlertsSegue", sender: self)
+        }
+    }
     func respondToAlert(){
         
         print("trying to respond")
@@ -125,6 +138,10 @@ class AlertInfoViewController: UIViewController, CLLocationManagerDelegate {
                 print(json["status"]!)
                 if((json["status"]! as AnyObject).isEqual("success")){
                     print("back here")
+                    // perform segue
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "resolveAlertSegue", sender: self)
+                    }
                     
                     
                     if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!))

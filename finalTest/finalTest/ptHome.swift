@@ -112,13 +112,15 @@ class ptHome: UIViewController, UITableViewDataSource, CLLocationManagerDelegate
     @IBOutlet weak var tableView: UITableView!
     
     @IBAction func alertCreation(_ sender: Any) {
+        print(self.selectedTags)
         createAlert()
     }
     
     func createAlert(){
         let urlString = self.appDelegate.endpoint+"/createAlert"
         var params: [String: Any] = ["description": self.desc.text, "latitude": self.latitude, "longitude": self.longitude,
-        "userId": self.appDelegate.userId]
+        "userId": self.appDelegate.userId,
+        "tags":self.selectedTags as? [String]]
         
         let requestBody = try? JSONSerialization.data(withJSONObject: params)
         
