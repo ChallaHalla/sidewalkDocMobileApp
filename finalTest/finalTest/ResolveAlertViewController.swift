@@ -98,7 +98,12 @@ class ResolveAlertViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     
-
+    @IBAction func resolveAlert(_ sender: Any) {
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "resolveAlertSegue", sender: self)
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

@@ -135,6 +135,11 @@ class PatientAlertViewController: UIViewController, CLLocationManagerDelegate {
             }
         }).resume()
     }
+    @IBAction func resolveAlert(_ sender: Any) {
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "resolvePatientAlertSegue", sender: self)
+        }
+    }
     /*
     // MARK: - Navigation
 

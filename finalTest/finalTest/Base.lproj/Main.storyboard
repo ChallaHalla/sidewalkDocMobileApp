@@ -258,6 +258,7 @@
                                 <state key="normal" title="Done"/>
                                 <connections>
                                     <action selector="cancelButton:" destination="lZx-Gx-kyG" eventType="touchUpInside" id="hAa-LD-W1v"/>
+                                    <action selector="resolveAlert:" destination="Uaj-Nh-QHo" eventType="touchUpInside" id="i6B-Py-g1a"/>
                                 </connections>
                             </button>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="g0k-GZ-6gP">
@@ -270,6 +271,7 @@
                     </view>
                     <connections>
                         <outlet property="mapView" destination="g0k-GZ-6gP" id="mPI-I4-LF1"/>
+                        <segue destination="lZx-Gx-kyG" kind="presentation" identifier="resolvePatientAlertSegue" id="HeH-Lk-Ia8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HYG-Fp-RH3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -563,6 +565,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="31"/>
                                 <state key="normal" title="Resolve"/>
+                                <connections>
+                                    <action selector="resolveAlert:" destination="47u-YT-fTo" eventType="touchUpInside" id="4vs-5q-1iw"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nSC-Rh-kcB">
                                 <rect key="frame" x="97" y="255" width="120" height="28"/>
@@ -599,6 +604,7 @@
                     <connections>
                         <outlet property="descriptionText" destination="f2m-OL-oH4" id="xZL-0V-LfM"/>
                         <outlet property="symptoms" destination="Wcs-ss-r36" id="8cW-PR-sr8"/>
+                        <segue destination="ROe-bD-eNC" kind="presentation" identifier="resolveAlertSegue" id="J5Y-HF-6gf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fkP-O1-vEx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -607,7 +613,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="7hf-lV-Sxh"/>
-        <segue reference="jg8-65-Uum"/>
+        <segue reference="J5Y-HF-6gf"/>
+        <segue reference="HeH-Lk-Ia8"/>
     </inferredMetricsTieBreakers>
 </document>
