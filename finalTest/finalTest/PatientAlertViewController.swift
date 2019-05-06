@@ -12,10 +12,11 @@ import UIKit
 class PatientAlertViewController: UIViewController {
 
     var alert: [String:Any] = [:]
+    var doctor: [String:Any] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print(self.doctor)
         // Do any additional setup after loading the view.
     }
     

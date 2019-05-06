@@ -12,14 +12,15 @@ class PairAlertViewController: UIViewController {
 
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
-    
+    var alert: [String:Any] = [:]
+    var doctor: [String:Any] = [:]
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let alertView = segue.destination as? PatientAlertViewController {
             alertView.alert = self.alert
+            alertView.doctor = self.doctor
         }
     }
     
-    var alert: [String:Any] = [:]
     override func viewDidLoad() {
         super.viewDidLoad()
 //        print(alert)
@@ -65,6 +66,8 @@ class PairAlertViewController: UIViewController {
                     // go to next screen if doctor not null
                     print(self.alert["doctor"]! as? String)
                     if(self.alert["doctor"]! as? String != nil){
+                        self.doctor = json["doctor"] as! [String:Any]
+                        self.timer?.invalidate()
                         DispatchQueue.main.async {
                             self.performSegue(withIdentifier: "doctorPairedSegue", sender: self)
                         }
