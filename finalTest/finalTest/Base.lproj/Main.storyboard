@@ -260,14 +260,21 @@
                                     <action selector="cancelButton:" destination="lZx-Gx-kyG" eventType="touchUpInside" id="hAa-LD-W1v"/>
                                 </connections>
                             </button>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="g0k-GZ-6gP">
+                                <rect key="frame" x="-6" y="196" width="420" height="469"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="pbG-er-RNM"/>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="g0k-GZ-6gP" id="mPI-I4-LF1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HYG-Fp-RH3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2193" y="455"/>
+            <point key="canvasLocation" x="2192.753623188406" y="454.6875"/>
         </scene>
         <!--Registration View Controller-->
         <scene sceneID="cXp-G5-vOA">
