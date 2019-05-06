@@ -17,6 +17,7 @@ class PatientAlertViewController: UIViewController, CLLocationManagerDelegate {
     var doctor: [String:Any] = [:]
     let locationManager = CLLocationManager();
     var docMarker = MKPointAnnotation();
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -35,7 +36,19 @@ class PatientAlertViewController: UIViewController, CLLocationManagerDelegate {
         mapView.showsPointsOfInterest = false;
         mapView.addAnnotation(docMarker);
         docMarker.title = "Doctor";
+        startTimer()
     }
+    weak var timer: Timer?
+    
+    func startTimer() {
+        timer?.invalidate()   // just in case you had existing `Timer`, `invalidate` it before we lose our reference to it
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
+            print("AGIN")
+            self?.getAlert()
+            self?.updateDoctorLoc()
+        }
+    }
+    
     
     // https://developer.apple.com/documentation/corelocation/cllocationmanagerdelegate/1423615-locationmanager
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -57,6 +70,8 @@ class PatientAlertViewController: UIViewController, CLLocationManagerDelegate {
         let docLat = doctor["latitude"] as! CLLocationDegrees;
         let docLong = doctor["longitude"] as! CLLocationDegrees;
         let docLoc2D = CLLocationCoordinate2D(latitude: docLat, longitude: docLong);
+        print(docLat)
+        print(docLong)
         
         // location of alert is user's current location
         let alertLoc2D = mapView.userLocation.coordinate;
@@ -83,6 +98,42 @@ class PatientAlertViewController: UIViewController, CLLocationManagerDelegate {
         let coordinateRegion = MKCoordinateRegion(center: center, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius);
         mapView.setRegion(coordinateRegion, animated: true);
         
+    }
+    
+    func getAlert(){
+        print("refreshing alert")
+        
+        var components = URLComponents(string: self.appDelegate.endpoint+"/getAlert")!
+        components.queryItems = [
+            URLQueryItem(name: "alertId", value: self.alert["_id"] as! String)
+        ]
+        components.percentEncodedQuery = components.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
+        var request = URLRequest(url: components.url!)
+        
+        
+        request.httpMethod = "GET"
+        
+        
+        URLSession.shared.dataTask(with:request, completionHandler: {(data, response, error) in
+            guard let data = data, error == nil else {
+                print("in guard")
+                return
+            }
+            
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
+                print(json["status"]!)
+                if((json["status"]! as AnyObject).isEqual("success")){
+                    self.alert = json["alert"] as! [String:Any]
+                    self.doctor = json["alert"] as! [String:Any]
+                } else{
+                    print("something went wrong")
+                }
+            } catch let error as NSError {
+                print("in catch")
+                print(error)
+            }
+        }).resume()
     }
     /*
     // MARK: - Navigation

@@ -141,19 +141,20 @@ class AlertInfoViewController: UIViewController, CLLocationManagerDelegate {
                     print("back here")
                     // perform segue
                     DispatchQueue.main.async {
+//                         self.openTrackerInBrowser()
                         self.performSegue(withIdentifier: "resolveAlertSegue", sender: self)
                     }
                     
-                    
-                    if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!))
-                    {
-                        UIApplication.shared.openURL(NSURL(string:
-                            "comgooglemaps://?saddr=&daddr=\(Float(self.alert["latitude"] as! CLLocationDegrees)),\(Float(self.alert["latitude"] as! CLLocationDegrees))&directionsmode=driving")! as URL)
-                    } else
-                    {
-                        NSLog("Can't use com.google.maps://");
-                        self.openTrackerInBrowser()
-                    }
+//
+//                    if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!))
+//                    {
+//                        UIApplication.shared.openURL(NSURL(string:
+//                            "comgooglemaps://?saddr=&daddr=\(Float(self.alert["latitude"] as! CLLocationDegrees)),\(Float(self.alert["latitude"] as! CLLocationDegrees))&directionsmode=driving")! as URL)
+//                    } else
+//                    {
+//                        NSLog("Can't use com.google.maps://");
+//                        self.openTrackerInBrowser()
+//                    }
                     
                     
                 } else{
