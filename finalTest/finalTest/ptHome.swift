@@ -69,6 +69,10 @@ class ptHome: UIViewController, UITableViewDataSource, CLLocationManagerDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.hideKeyboardWhenTappedAround()
+        
+        
         locationManager.requestAlwaysAuthorization();
         locationManager.requestWhenInUseAuthorization();
         if (CLLocationManager.locationServicesEnabled()) {

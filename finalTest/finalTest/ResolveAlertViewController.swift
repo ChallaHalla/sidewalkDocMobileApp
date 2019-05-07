@@ -34,12 +34,14 @@ class ResolveAlertViewController: UIViewController, CLLocationManagerDelegate {
         }
 
         
-         self.descriptionText.text = self.alert["description"] as! String;
+        self.descriptionText.text = self.alert["description"] as! String;
+        
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (t) in
             // send lat and long to backend
             self.updateDocLocation()
             print("time")
         }
+        self.openTrackerInBrowser()
 //        self.symptoms.text = self.alert["tags"] as! String;
 
         // update doc lation every x seconds in bg
@@ -104,6 +106,12 @@ class ResolveAlertViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    func openTrackerInBrowser(){
+        UIApplication.shared.openURL(NSURL(string:
+            "comgooglemaps://?saddr=&daddr=\(self.alert["latitude"]!),\(self.alert["longitude"]!)&directionsmode=driving")! as URL)
+        }
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -114,4 +122,4 @@ class ResolveAlertViewController: UIViewController, CLLocationManagerDelegate {
     }
     */
 
-}
+

@@ -141,7 +141,6 @@ class AlertInfoViewController: UIViewController, CLLocationManagerDelegate {
                     print("back here")
                     // perform segue
                     DispatchQueue.main.async {
-//                         self.openTrackerInBrowser()
                         self.performSegue(withIdentifier: "resolveAlertSegue", sender: self)
                     }
                     
@@ -167,11 +166,7 @@ class AlertInfoViewController: UIViewController, CLLocationManagerDelegate {
         }).resume()
         
     }
-    func openTrackerInBrowser(){
-        if let urlDestination = URL.init(string: "https://www.google.com/maps/dir/?saddr=&daddr=\(Float(self.alert["latitude"] as! CLLocationDegrees)),\(Float(self.alert["longitude"] as! CLLocationDegrees))&directionsmode=driving") {
-            UIApplication.shared.openURL(urlDestination)
-        }
-    }
+    
     /*
     // MARK: - Navigation
 

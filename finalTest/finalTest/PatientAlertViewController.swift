@@ -125,7 +125,7 @@ class PatientAlertViewController: UIViewController, CLLocationManagerDelegate {
                 print(json["status"]!)
                 if((json["status"]! as AnyObject).isEqual("success")){
                     self.alert = json["alert"] as! [String:Any]
-                    self.doctor = json["alert"] as! [String:Any]
+                    self.doctor = json["doctor"] as! [String:Any]
                 } else{
                     print("something went wrong")
                 }
