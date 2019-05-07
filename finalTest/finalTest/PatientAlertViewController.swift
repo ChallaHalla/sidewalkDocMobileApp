@@ -142,9 +142,42 @@ class PatientAlertViewController: UIViewController, CLLocationManagerDelegate {
         }).resume()
     }
     @IBAction func resolveAlert(_ sender: Any) {
-        DispatchQueue.main.async {
-            self.performSegue(withIdentifier: "resolvePatientAlertSegue", sender: self)
-        }
+        let urlString = self.appDelegate.endpoint+"/resolveAlert"
+        let params: [String: Any] = ["alertId": self.alert["_id"] as! String]
+        
+        let requestBody = try? JSONSerialization.data(withJSONObject: params)
+        
+        var request = URLRequest(url:URL(string: urlString)!)
+        request.httpBody = requestBody
+        request.httpMethod = "POST"
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Accept")
+        
+        
+        URLSession.shared.dataTask(with:request, completionHandler: {(data, response, error) in
+            guard let data = data, error == nil else {
+                print("in guard")
+                return
+            }
+            
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
+                
+                if((json["status"]! as AnyObject).isEqual("success")){
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "resolvePatientAlertSegue", sender: self)
+                    }
+                } else{
+                    print("could not resolve alert")
+                    // should it still return to alert creation view if it fails?
+                }
+                
+            } catch let error as NSError {
+                print("in catch")
+                print(error)
+            }
+        }).resume()
+        
     }
     @IBAction func editAlert(_ sender: Any) {
         DispatchQueue.main.async {
