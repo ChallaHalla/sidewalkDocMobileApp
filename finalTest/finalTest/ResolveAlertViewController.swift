@@ -20,7 +20,7 @@ class ResolveAlertViewController: UIViewController, CLLocationManagerDelegate {
     let locationManager = CLLocationManager();
     var latitude = 0.0;
     var longitude = 0.0;
-    
+    weak var timer: Timer?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,7 +36,7 @@ class ResolveAlertViewController: UIViewController, CLLocationManagerDelegate {
         
         self.descriptionText.text = self.alert["description"] as! String;
         
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (t) in
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (t) in
             // send lat and long to backend
             self.updateDocLocation()
             self.descriptionText.text = self.alert["description"] as! String
@@ -91,6 +91,12 @@ class ResolveAlertViewController: UIViewController, CLLocationManagerDelegate {
                 print(json["status"]!)
                 if((json["status"]! as AnyObject).isEqual("success")){
                     self.alert = json["alert"] as! [String:Any]
+                    if(self.alert["resolved"] as! Bool == true){
+                        self.timer?.invalidate()
+                        DispatchQueue.main.async {
+                            self.performSegue(withIdentifier: "resolveAlertSegue", sender: self)
+                        }
+                    }
                     print("updated succesfully")
                 } else{
                     print("something is wrong")
@@ -127,6 +133,7 @@ class ResolveAlertViewController: UIViewController, CLLocationManagerDelegate {
                 let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
                 
                 if((json["status"]! as AnyObject).isEqual("success")){
+                    self.timer?.invalidate()
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "resolveAlertSegue", sender: self)
                     }

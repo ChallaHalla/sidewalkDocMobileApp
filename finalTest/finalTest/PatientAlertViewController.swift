@@ -132,6 +132,15 @@ class PatientAlertViewController: UIViewController, CLLocationManagerDelegate {
                 if((json["status"]! as AnyObject).isEqual("success")){
                     self.alert = json["alert"] as! [String:Any]
                     self.doctor = json["doctor"] as! [String:Any]
+                    
+                    if(self.alert["resolved"] as! Bool == true){
+                        self.timer?.invalidate()
+                        DispatchQueue.main.async {
+                            self.performSegue(withIdentifier: "resolvePatientAlertSegue", sender: self)
+                        }
+                    }
+                    
+                    
                 } else{
                     print("something went wrong")
                 }
@@ -164,6 +173,7 @@ class PatientAlertViewController: UIViewController, CLLocationManagerDelegate {
                 let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
                 
                 if((json["status"]! as AnyObject).isEqual("success")){
+                    self.timer?.invalidate()
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "resolvePatientAlertSegue", sender: self)
                     }
