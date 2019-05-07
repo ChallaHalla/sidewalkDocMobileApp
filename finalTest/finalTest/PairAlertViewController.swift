@@ -19,10 +19,15 @@ class PairAlertViewController: UIViewController {
             alertView.alert = self.alert
             alertView.doctor = self.doctor
         }
+        if let alertView = segue.destination as? EditAlertViewController {
+            alertView.alert = self.alert
+            alertView.doctor = self.doctor
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 //        print(alert)
         // Do any additional setup after loading the view.
         startTimer()
@@ -39,7 +44,7 @@ class PairAlertViewController: UIViewController {
     
     func getAlert(){
         print("refreshing alert")
-        
+        print(self.alert)
         var components = URLComponents(string: self.appDelegate.endpoint+"/getAlert")!
         components.queryItems = [
             URLQueryItem(name: "alertId", value: self.alert["_id"] as! String)
@@ -82,6 +87,12 @@ class PairAlertViewController: UIViewController {
         }).resume()
     }
 
+    @IBAction func editAlert(_ sender: Any) {
+        self.timer?.invalidate()
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "editAlertSegue", sender: self)
+        }
+    }
     /*
     // MARK: - Navigation
 

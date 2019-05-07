@@ -39,6 +39,9 @@ class ResolveAlertViewController: UIViewController, CLLocationManagerDelegate {
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (t) in
             // send lat and long to backend
             self.updateDocLocation()
+            self.descriptionText.text = self.alert["description"] as! String
+            let tagsArr =  self.alert["tags"] as! [String]
+            self.symptoms.text = tagsArr.joined(separator:", ")
             print("time")
         }
         self.openTrackerInBrowser()
@@ -67,7 +70,7 @@ class ResolveAlertViewController: UIViewController, CLLocationManagerDelegate {
         
         print(self.latitude)
         print(self.longitude)
-        var params: [String: Any] = ["doctorId": self.appDelegate.userId, "latitude": self.latitude, "longitude": self.longitude]
+        var params: [String: Any] = ["doctorId": self.appDelegate.userId, "latitude": self.latitude, "longitude": self.longitude, "alertId": self.alert["_id"]]
         let requestBody = try? JSONSerialization.data(withJSONObject: params)
         
         var request = URLRequest(url:URL(string: urlString)!)
@@ -87,7 +90,8 @@ class ResolveAlertViewController: UIViewController, CLLocationManagerDelegate {
                 let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
                 print(json["status"]!)
                 if((json["status"]! as AnyObject).isEqual("success")){
-                    print("updayed succesfully")
+                    self.alert = json["alert"] as! [String:Any]
+                    print("updated succesfully")
                 } else{
                     print("something is wrong")
                 }

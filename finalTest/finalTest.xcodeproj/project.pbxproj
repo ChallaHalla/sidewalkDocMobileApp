@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5342AB2522821CC100690C64 /* EditAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5342AB2422821CC100690C64 /* EditAlertViewController.swift */; };
 		921FBA142278B30E003791C8 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921FBA132278B30E003791C8 /* RegistrationViewController.swift */; };
 		92CF857D227F94F500D4BF8D /* PatientAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CF857C227F94F500D4BF8D /* PatientAlertViewController.swift */; };
 		92CF857F227F96C600D4BF8D /* PairAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CF857E227F96C600D4BF8D /* PairAlertViewController.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5342AB2422821CC100690C64 /* EditAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAlertViewController.swift; sourceTree = "<group>"; };
 		921FBA132278B30E003791C8 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		92CF857C227F94F500D4BF8D /* PatientAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientAlertViewController.swift; sourceTree = "<group>"; };
 		92CF857E227F96C600D4BF8D /* PairAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PairAlertViewController.swift; sourceTree = "<group>"; };
@@ -114,13 +116,14 @@
 				B70597452255112300AE1386 /* AppDelegate.swift */,
 				B70597472255112300AE1386 /* ViewController.swift */,
 				B70597492255112300AE1386 /* Main.storyboard */,
+				5342AB2422821CC100690C64 /* EditAlertViewController.swift */,
+				B7DE95BB2270EBD100141783 /* ptHome.swift */,
 				92FBDC1D227BF86900000E2E /* AlertInfoViewController.swift */,
 				92CF857C227F94F500D4BF8D /* PatientAlertViewController.swift */,
 				92D940AE227F22BA004CDC90 /* ResolveAlertViewController.swift */,
 				B705974C2255112B00AE1386 /* Assets.xcassets */,
 				B705974E2255112B00AE1386 /* LaunchScreen.storyboard */,
 				B70597512255112B00AE1386 /* Info.plist */,
-				B7DE95BB2270EBD100141783 /* ptHome.swift */,
 				92CF857E227F96C600D4BF8D /* PairAlertViewController.swift */,
 				921FBA132278B30E003791C8 /* RegistrationViewController.swift */,
 				92FBDC1B227BF1EE00000E2E /* FindAlertsViewController.swift */,
@@ -285,6 +288,7 @@
 				92FBDC1C227BF1EF00000E2E /* FindAlertsViewController.swift in Sources */,
 				B7DE95BC2270EBD100141783 /* ptHome.swift in Sources */,
 				92CF857F227F96C600D4BF8D /* PairAlertViewController.swift in Sources */,
+				5342AB2522821CC100690C64 /* EditAlertViewController.swift in Sources */,
 				92FBDC1E227BF86900000E2E /* AlertInfoViewController.swift in Sources */,
 				B70597482255112300AE1386 /* ViewController.swift in Sources */,
 				92D940AF227F22BA004CDC90 /* ResolveAlertViewController.swift in Sources */,

@@ -38,6 +38,12 @@ class PatientAlertViewController: UIViewController, CLLocationManagerDelegate {
         docMarker.title = "Doctor";
         startTimer()
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let alertView = segue.destination as? EditAlertViewController {
+            alertView.alert = self.alert
+            alertView.doctor = self.doctor
+        }
+    }
     weak var timer: Timer?
     
     func startTimer() {
@@ -140,8 +146,13 @@ class PatientAlertViewController: UIViewController, CLLocationManagerDelegate {
             self.performSegue(withIdentifier: "resolvePatientAlertSegue", sender: self)
         }
     }
+    @IBAction func editAlert(_ sender: Any) {
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "alertEditSegue", sender: self)
+        }
+    }
     /*
-    // MARK: - Navigation
+     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
