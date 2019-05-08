@@ -15,7 +15,8 @@ class ResolveAlertViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var descriptionText: UILabel!
     var alert: [String:Any] = [:]
-    @IBOutlet weak var symptoms: UILabel!
+    
+    @IBOutlet weak var symptoms: UITextView!
     
     let locationManager = CLLocationManager();
     var latitude = 0.0;
@@ -41,7 +42,8 @@ class ResolveAlertViewController: UIViewController, CLLocationManagerDelegate {
             self.updateDocLocation()
             self.descriptionText.text = self.alert["description"] as! String
             let tagsArr =  self.alert["tags"] as! [String]
-            self.symptoms.text = tagsArr.joined(separator:", ")
+            self.symptoms.text = "\u{2022}" +  tagsArr.joined(separator:"\n\u{2022}")
+//            self.symptoms.sizeToFit()
             print("time")
         }
         self.openTrackerInBrowser()

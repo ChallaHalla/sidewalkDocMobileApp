@@ -89,6 +89,7 @@ class EditAlertViewController: UIViewController, UITableViewDataSource, CLLocati
         self.desc.text = self.alert["description"] as! String
         
         
+        
         locationManager.requestAlwaysAuthorization();
         locationManager.requestWhenInUseAuthorization();
         if (CLLocationManager.locationServicesEnabled()) {

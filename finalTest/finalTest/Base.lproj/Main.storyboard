@@ -268,7 +268,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="existing descr" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4vY-3R-7wQ">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4vY-3R-7wQ">
                                 <rect key="frame" x="65" y="189" width="284" height="151"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -677,33 +677,33 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wcs-ss-r36">
-                                <rect key="frame" x="97" y="481" width="221" height="168"/>
+                            <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="trq-qi-Tcc">
+                                <rect key="frame" x="97" y="474" width="267" height="289"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="1eZ-Bv-lSb"/>
                     </view>
                     <connections>
                         <outlet property="descriptionText" destination="f2m-OL-oH4" id="xZL-0V-LfM"/>
-                        <outlet property="symptoms" destination="Wcs-ss-r36" id="8cW-PR-sr8"/>
+                        <outlet property="symptoms" destination="trq-qi-Tcc" id="cwy-KG-UdY"/>
                         <segue destination="ROe-bD-eNC" kind="presentation" identifier="resolveAlertSegue" id="J5Y-HF-6gf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fkP-O1-vEx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2663.768115942029" y="-242.41071428571428"/>
+            <point key="canvasLocation" x="2662.3188405797105" y="-242.41071428571428"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Pma-dC-j5l"/>
-        <segue reference="7ve-2n-YNm"/>
+        <segue reference="J5Y-HF-6gf"/>
+        <segue reference="tGl-EH-QMQ"/>
         <segue reference="MQF-zc-K5b"/>
-        <segue reference="iP0-G5-Yo1"/>
+        <segue reference="VKX-aZ-tUP"/>
         <segue reference="0pa-1r-FK5"/>
     </inferredMetricsTieBreakers>
 </document>

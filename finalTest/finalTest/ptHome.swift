@@ -83,8 +83,7 @@ class ptHome: UIViewController, UITableViewDataSource, CLLocationManagerDelegate
         }
         // Input the data into the array
         // Do any additional setup after loading the view.
-    
-        
+
         tableView.dataSource = self
         tableView.delegate = self
     }
