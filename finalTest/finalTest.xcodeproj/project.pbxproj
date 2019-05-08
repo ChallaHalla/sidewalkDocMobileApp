@@ -42,6 +42,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		532D2BB222832C7D00CB37FB /* WSP.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = WSP.gpx; sourceTree = "<group>"; };
+		532D2BB322832DA400CB37FB /* Bobst.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Bobst.gpx; sourceTree = "<group>"; };
+		532D2BB422832DE300CB37FB /* W4th.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = W4th.gpx; sourceTree = "<group>"; };
 		5342AB2422821CC100690C64 /* EditAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAlertViewController.swift; sourceTree = "<group>"; };
 		921FBA132278B30E003791C8 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		92CF857C227F94F500D4BF8D /* PatientAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientAlertViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +130,9 @@
 				92CF857E227F96C600D4BF8D /* PairAlertViewController.swift */,
 				921FBA132278B30E003791C8 /* RegistrationViewController.swift */,
 				92FBDC1B227BF1EE00000E2E /* FindAlertsViewController.swift */,
+				532D2BB222832C7D00CB37FB /* WSP.gpx */,
+				532D2BB322832DA400CB37FB /* Bobst.gpx */,
+				532D2BB422832DE300CB37FB /* W4th.gpx */,
 			);
 			path = finalTest;
 			sourceTree = "<group>";

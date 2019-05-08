@@ -684,12 +684,19 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aX3-2p-997">
+                                <rect key="frame" x="97" y="298" width="267" height="86"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="1eZ-Bv-lSb"/>
                     </view>
                     <connections>
-                        <outlet property="descriptionText" destination="f2m-OL-oH4" id="xZL-0V-LfM"/>
+                        <outlet property="descriptionText" destination="aX3-2p-997" id="RTs-Tn-xhO"/>
                         <outlet property="symptoms" destination="trq-qi-Tcc" id="cwy-KG-UdY"/>
                         <segue destination="ROe-bD-eNC" kind="presentation" identifier="resolveAlertSegue" id="J5Y-HF-6gf"/>
                     </connections>
@@ -703,7 +710,7 @@
         <segue reference="J5Y-HF-6gf"/>
         <segue reference="tGl-EH-QMQ"/>
         <segue reference="MQF-zc-K5b"/>
-        <segue reference="VKX-aZ-tUP"/>
+        <segue reference="iP0-G5-Yo1"/>
         <segue reference="0pa-1r-FK5"/>
     </inferredMetricsTieBreakers>
 </document>

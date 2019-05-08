@@ -60,7 +60,7 @@ class FindAlertsViewController: UIViewController, UITableViewDataSource, CLLocat
     {
         selectedAlert = indexPath.row
         print(selectedAlert)
-        
+        self.timer?.invalidate()
         performSegue(withIdentifier: "alertInfoSegue", sender: self)
     }
 

@@ -13,7 +13,7 @@ class ResolveAlertViewController: UIViewController, CLLocationManagerDelegate {
 
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
-    @IBOutlet weak var descriptionText: UILabel!
+    @IBOutlet weak var descriptionText: UITextView!
     var alert: [String:Any] = [:]
     
     @IBOutlet weak var symptoms: UITextView!
