@@ -64,6 +64,8 @@ class FindAlertsViewController: UIViewController, UITableViewDataSource, CLLocat
         performSegue(withIdentifier: "alertInfoSegue", sender: self)
     }
 
+    weak var timer: Timer?
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -78,18 +80,17 @@ class FindAlertsViewController: UIViewController, UITableViewDataSource, CLLocat
         
         // latitude not updated in time for get alerts so initially none are found. need to fix
         getalerts();
-       
-        
-        
-        // Add the label to the view controller's root 
-        
-
-        // Do any additional setup after loading the view.
-        
+        startTimer();
         tableView.dataSource = self
         tableView.delegate = self
     }
     
+    func startTimer() {
+        timer?.invalidate()   // just in case you had existing `Timer`, `invalidate` it before we lose our reference to it
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
+            self?.getalerts()
+        }
+    }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         /*
          manager: "location manager obj that generated the update event"

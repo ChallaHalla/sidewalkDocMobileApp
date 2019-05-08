@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var userId: String? = nil
-    let endpoint = "http://172.22.90.82:3000"
+    let endpoint = "http://192.168.1.154:3000"
     
     var checkCredentials = -1
     var checkAccounts = -1
