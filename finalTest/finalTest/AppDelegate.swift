@@ -21,7 +21,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        UIApplication.shared.setMinimumBackgroundFetchInterval(5)
         return true
+    }
+    
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        print("BG FETCH")
+        var vc = window?.rootViewController?.presentingViewController
+        if vc is ResolveAlertViewController{
+            vc = vc as! ResolveAlertViewController!
+            print("BG FETCH")
+//            vc.update()
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

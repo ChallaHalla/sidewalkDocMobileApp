@@ -14,7 +14,9 @@ class FindAlertsViewController: UIViewController, UITableViewDataSource, CLLocat
     @IBOutlet weak var tableView: UITableView!
     
     
+    
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let defaults = UserDefaults.standard
     
     let locationManager = CLLocationManager();
     var latitude = 0.0;
@@ -196,14 +198,15 @@ class FindAlertsViewController: UIViewController, UITableViewDataSource, CLLocat
         }).resume()
         
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func logout(_ sender: Any) {
+        defaults.set(nil, forKey:"userType")
+        defaults.set(nil, forKey:"username")
+        defaults.set(nil, forKey:"password")
+        self.timer?.invalidate()
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "providerLogoutSegue", sender: self)
+        }
     }
-    */
-
+    
 }

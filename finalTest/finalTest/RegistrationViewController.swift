@@ -37,6 +37,7 @@ class RegistrationViewController: UIViewController, UIPickerViewDelegate, UIPick
         pickerData = ["Internal Medicine", "Pediatrics", "Ob/Gyn", "Surgery", "Dermatology", "Emergency Medicine"]
         
         self.appDelegate.checkAccounts = -1
+        self.hideKeyboardWhenTappedAround()
         
     }
     

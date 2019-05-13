@@ -147,13 +147,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Enter description here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="IiE-f5-fwE">
-                                <rect key="frame" x="65" y="205" width="284" height="151"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4y8-UZ-LEW">
                                 <rect key="frame" x="111" y="746" width="193" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -163,6 +156,13 @@
                                     <action selector="alertCreation:" destination="lZx-Gx-kyG" eventType="touchUpInside" id="Vw7-e9-pVN"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Enter description here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="IiE-f5-fwE">
+                                <rect key="frame" x="65" y="205" width="284" height="151"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rkb-Ze-X9O">
                                 <rect key="frame" x="65" y="439" width="284" height="275"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -178,6 +178,14 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e1i-14-Vyj">
+                                <rect key="frame" x="183" y="807" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="log out"/>
+                                <connections>
+                                    <action selector="logout:" destination="lZx-Gx-kyG" eventType="touchUpInside" id="NZr-MU-edW"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="dge-A4-Kro"/>
@@ -186,6 +194,7 @@
                         <outlet property="desc" destination="IiE-f5-fwE" id="7Us-Z6-vzD"/>
                         <outlet property="tableView" destination="rkb-Ze-X9O" id="0ib-5b-9FU"/>
                         <segue destination="2a0-WE-GmL" kind="presentation" identifier="alertWaitSegue" id="VKX-aZ-tUP"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="patientLogoutSegue" id="wbh-Xa-mp9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U5Z-NO-dV2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -523,6 +532,14 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gh9-yv-pmo">
+                                <rect key="frame" x="183" y="793" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="log out"/>
+                                <connections>
+                                    <action selector="logout:" destination="ROe-bD-eNC" eventType="touchUpInside" id="t7i-LC-NuG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="qc8-3V-NHO"/>
@@ -530,11 +547,12 @@
                     <connections>
                         <outlet property="tableView" destination="5q7-mc-HLX" id="6Mw-7j-wT4"/>
                         <segue destination="ZKA-K3-Cam" kind="presentation" identifier="alertInfoSegue" id="5bZ-0W-Awy"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="providerLogoutSegue" id="sj3-ew-oVK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qlF-3m-uok" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="775.36231884057975" y="-242.41071428571428"/>
+            <point key="canvasLocation" x="548" y="-606"/>
         </scene>
         <!--Alert Info View Controller-->
         <scene sceneID="5uE-a2-SKf">
@@ -707,10 +725,11 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="J5Y-HF-6gf"/>
+        <segue reference="7hf-lV-Sxh"/>
         <segue reference="tGl-EH-QMQ"/>
         <segue reference="MQF-zc-K5b"/>
-        <segue reference="iP0-G5-Yo1"/>
-        <segue reference="0pa-1r-FK5"/>
+        <segue reference="VKX-aZ-tUP"/>
+        <segue reference="fVw-J8-MAt"/>
+        <segue reference="wbh-Xa-mp9"/>
     </inferredMetricsTieBreakers>
 </document>

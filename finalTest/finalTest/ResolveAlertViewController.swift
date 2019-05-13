@@ -156,6 +156,11 @@ class ResolveAlertViewController: UIViewController, CLLocationManagerDelegate {
         UIApplication.shared.openURL(NSURL(string:
             "comgooglemaps://?saddr=&daddr=\(self.alert["latitude"]!),\(self.alert["longitude"]!)&directionsmode=driving")! as URL)
         }
+    
+    func update(){
+        print("bg update!")
+    }
+    
     }
     
     /*

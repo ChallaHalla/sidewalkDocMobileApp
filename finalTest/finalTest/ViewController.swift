@@ -9,9 +9,11 @@
 import UIKit
 import Foundation
 
+
 class ViewController: UIViewController {
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let defaults = UserDefaults.standard
     
     @IBOutlet weak var usernameInput: UITextField!
 
@@ -26,11 +28,13 @@ class ViewController: UIViewController {
         self.hideKeyboardWhenTappedAround()
         
         self.appDelegate.checkCredentials = -1
+        
+        self.tryLogin()
     }
     
     
     @IBAction func providerEnter(_ sender: Any) {
-        login(userType: "provider")
+        login(userType: "provider", username: self.usernameInput.text!, password: self.passwordInput.text!)
 //        self.performSegue(withIdentifier: "providerSegue", sender: self)
         
         if self.appDelegate.checkCredentials == 1{
@@ -40,7 +44,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func patientEnter(_ sender: Any) {
-        login(userType: "patient")
+        login(userType: "patient", username: self.usernameInput.text!, password: self.passwordInput.text!)
         
         if self.appDelegate.checkCredentials == 1{
             self.loginHeader.text = "Invalid credentials. Try again"
@@ -50,10 +54,8 @@ class ViewController: UIViewController {
     @IBAction func register(_ sender: Any) {
          self.performSegue(withIdentifier: "registerSegue", sender: self)
     }
-    func login(userType:String){
+    func login(userType:String, username:String, password:String){
         print("Perform login heres")
-        let username: String = usernameInput.text!
-        let password: String = passwordInput.text!
         let urlString = self.appDelegate.endpoint+"/login"
         
      
@@ -84,10 +86,12 @@ class ViewController: UIViewController {
                 if((json["status"]! as AnyObject).isEqual("success")){
                     self.appDelegate.userId = json["userId"]! as! String
                     if(userType == "patient"){
+                        self.saveCredentials(userType: userType, username: username, password: password)
                         DispatchQueue.main.async {
                             self.performSegue(withIdentifier: "ptHomesegue", sender: self)
                         }
                     } else if(userType == "provider"){
+                        self.saveCredentials(userType: userType, username: username, password: password)
                         DispatchQueue.main.async {
                             self.performSegue(withIdentifier: "providerSegue", sender: self)
                         }
@@ -103,6 +107,20 @@ class ViewController: UIViewController {
             }
         }).resume()
         
+    }
+    func tryLogin(){
+        if(self.defaults.string(forKey: "userType") == "patient" || self.defaults.string(forKey: "userType") == "provider"){
+            let userType = self.defaults.string(forKey: "userType")!
+            let username = self.defaults.string(forKey: "username")!
+            let password = self.defaults.string(forKey: "password")!
+            self.login(userType: userType, username: username, password: password)
+        }
+    }
+    func saveCredentials(userType:String, username:String, password:String){
+        self.defaults.set(username,forKey: "username")
+        self.defaults.set(password,forKey: "password")
+        self.defaults.set(userType,forKey: "userType")
+        print("Credentials saved")
     }
     
 }

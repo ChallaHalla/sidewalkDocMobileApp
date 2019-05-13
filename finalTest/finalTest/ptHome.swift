@@ -15,6 +15,7 @@ class ptHome: UIViewController, UITableViewDataSource, CLLocationManagerDelegate
     let tags = ["Faint/no heartbeat", "Broken appendage", "Not breathing", "Heart attack", "Stroke", "Allergic reaction", "Car accident", "Fainting", "Heat stroke"]
     // selectedTags holds all the tags the user selects - this needs to be added to the alert
     var selectedTags: [String] = []
+    let defaults = UserDefaults.standard
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let alertView = segue.destination as? PairAlertViewController {
             alertView.alert = self.alert
@@ -164,14 +165,14 @@ class ptHome: UIViewController, UITableViewDataSource, CLLocationManagerDelegate
         }).resume()
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func logout(_ sender: Any) {
+        defaults.set(nil, forKey:"userType")
+        defaults.set(nil, forKey:"username")
+        defaults.set(nil, forKey:"password")
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "patientLogoutSegue", sender: self)
+        }
     }
-    */
-
+    
 }
