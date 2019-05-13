@@ -417,7 +417,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2gZ-DP-YMh">
                                 <rect key="frame" x="63" y="369" width="90" height="24"/>
@@ -725,11 +725,11 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="7hf-lV-Sxh"/>
+        <segue reference="Pma-dC-j5l"/>
         <segue reference="tGl-EH-QMQ"/>
         <segue reference="MQF-zc-K5b"/>
         <segue reference="VKX-aZ-tUP"/>
-        <segue reference="fVw-J8-MAt"/>
-        <segue reference="wbh-Xa-mp9"/>
+        <segue reference="0pa-1r-FK5"/>
+        <segue reference="TI2-7X-cLd"/>
     </inferredMetricsTieBreakers>
 </document>
