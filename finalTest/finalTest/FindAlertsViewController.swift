@@ -31,13 +31,6 @@ class FindAlertsViewController: UIViewController, UITableViewDataSource, CLLocat
     // selectedAlert holds the selected string from alertTable
     var selectedAlert = -1
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let alertView = segue.destination as? AlertInfoViewController {
-            alertView.alert = alerts[selectedAlert]
-            alertView.doctorLocation = CLLocation(latitude: self.latitude, longitude: self.longitude)
-        }
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return alertTable.count
     }
@@ -63,6 +56,7 @@ class FindAlertsViewController: UIViewController, UITableViewDataSource, CLLocat
         selectedAlert = indexPath.row
         print(selectedAlert)
         self.timer?.invalidate()
+        self.appDelegate.alert = self.alerts[selectedAlert]
         performSegue(withIdentifier: "alertInfoSegue", sender: self)
     }
 
@@ -156,48 +150,45 @@ class FindAlertsViewController: UIViewController, UITableViewDataSource, CLLocat
     }
     
 
-    @IBAction func getAlertsButton(_ sender: Any) {
-        print("entered");
-        getalerts();
-    }
-    
-     @IBAction func selectAlert(_ sender:UIButton!){
-        print("HERE in select alert")
-        let alertIndex = sender.tag
-        let urlString = self.appDelegate.endpoint+"/respondToAlert"
-        let alert = self.alerts[alertIndex]
-        var params: [String: Any] = ["alertId": alert["_id"]]
-        let requestBody = try? JSONSerialization.data(withJSONObject: params)
-        
-        var request = URLRequest(url:URL(string: urlString)!)
-        
-        request.httpBody = requestBody
-        request.httpMethod = "POST"
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Accept")
-        
-        URLSession.shared.dataTask(with:request, completionHandler: {(data, response, error) in
-            guard let data = data, error == nil else {
-                print("in guard")
-                return
-            }
-            do {
-                print("entered");
-                let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
-                
-                if((json["status"]! as AnyObject).isEqual("success")){
-                    print("alert accepted!")
-                } else{
-                    print("something went wrong credentials")
-                }
-                
-            } catch let error as NSError {
-                print("in catch")
-                print(error)
-            }
-        }).resume()
-        
-    }
+
+//
+//     @IBAction func selectAlert(_ sender:UIButton!){
+//        print("HERE in select alert")
+//        let alertIndex = sender.tag
+//        let urlString = self.appDelegate.endpoint+"/respondToAlert"
+//        self.appDelegate.alert = self.alerts[alertIndex]
+//        var params: [String: Any] = ["alertId": alert["_id"]]
+//        let requestBody = try? JSONSerialization.data(withJSONObject: params)
+//
+////        var request = URLRequest(url:URL(string: urlString)!)
+////
+////        request.httpBody = requestBody
+////        request.httpMethod = "POST"
+////        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+////        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Accept")
+//
+////        URLSession.shared.dataTask(with:request, completionHandler: {(data, response, error) in
+////            guard let data = data, error == nil else {
+////                print("in guard")
+////                return
+////            }
+////            do {
+////                print("entered");
+////                let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
+////
+////                if((json["status"]! as AnyObject).isEqual("success")){
+////                    print("alert accepted!")
+////                } else{
+////                    print("something went wrong credentials")
+////                }
+////
+////            } catch let error as NSError {
+////                print("in catch")
+////                print(error)
+////            }
+////        }).resume()
+//
+//    }
     
     @IBAction func logout(_ sender: Any) {
         defaults.set(nil, forKey:"userType")

@@ -36,7 +36,7 @@ class RegistrationViewController: UIViewController, UIPickerViewDelegate, UIPick
         
         pickerData = ["Internal Medicine", "Pediatrics", "Ob/Gyn", "Surgery", "Dermatology", "Emergency Medicine"]
         
-        self.appDelegate.checkAccounts = -1
+    
         self.hideKeyboardWhenTappedAround()
         
     }
@@ -82,9 +82,6 @@ class RegistrationViewController: UIViewController, UIPickerViewDelegate, UIPick
     @IBAction func createAccount(_ sender: Any) {
         register(userType: registrationType)
         
-        if self.appDelegate.checkAccounts == 1{
-            self.registerHeader.text = "A problem ocurred. Try again"
-        }
     }
     
     func register(userType:String){
@@ -136,8 +133,9 @@ class RegistrationViewController: UIViewController, UIPickerViewDelegate, UIPick
                     }
                 } else{
                     print("a problem occured")
-                    
-                    self.appDelegate.checkAccounts = 1
+                    DispatchQueue.main.async {
+                        self.registerHeader.text = "A problem ocurred. Try again"
+                    }
                 }
             } catch let error as NSError {
                 print("in catch")

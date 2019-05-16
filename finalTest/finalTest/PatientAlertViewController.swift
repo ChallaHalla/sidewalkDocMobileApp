@@ -13,17 +13,15 @@ import CoreLocation
 
 class PatientAlertViewController: UIViewController, CLLocationManagerDelegate {
 
-    var alert: [String:Any] = [:]
-    var doctor: [String:Any] = [:]
     let locationManager = CLLocationManager();
     var docMarker = MKPointAnnotation();
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     @IBOutlet weak var mapView: MKMapView!
+    weak var timer: Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(self.doctor)
         // Do any additional setup after loading the view.
         
         if (CLLocationManager.locationServicesEnabled()) {
@@ -38,18 +36,11 @@ class PatientAlertViewController: UIViewController, CLLocationManagerDelegate {
         docMarker.title = "Doctor";
         startTimer()
     }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let alertView = segue.destination as? EditAlertViewController {
-            alertView.alert = self.alert
-            alertView.doctor = self.doctor
-        }
-    }
-    weak var timer: Timer?
     
     func startTimer() {
         timer?.invalidate()   // just in case you had existing `Timer`, `invalidate` it before we lose our reference to it
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
-            print("AGIN")
+            print("timer loop")
             self?.getAlert()
             self?.updateDoctorLoc()
         }
@@ -58,26 +49,16 @@ class PatientAlertViewController: UIViewController, CLLocationManagerDelegate {
     
     // https://developer.apple.com/documentation/corelocation/cllocationmanagerdelegate/1423615-locationmanager
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        /*
-         manager: "location manager obj that generated the update event"
-         locations: array of CLLocations. always contains at least 1 element representing current location.
-         if updates were deferred or multiple locations arrived before they could be delivered, array contains
-         additional entries (in order they occurred. most recent at the end).
-         */
-        // locations[locations.endIndex - 1];
         updateDoctorLoc();
-        
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         NSLog(error.localizedDescription);
     }
     
     func updateDoctorLoc() {
-        let docLat = doctor["latitude"] as! CLLocationDegrees;
-        let docLong = doctor["longitude"] as! CLLocationDegrees;
+        let docLat = self.appDelegate.doctor!["latitude"] as! CLLocationDegrees;
+        let docLong = self.appDelegate.doctor!["longitude"] as! CLLocationDegrees;
         let docLoc2D = CLLocationCoordinate2D(latitude: docLat, longitude: docLong);
-        print(docLat)
-        print(docLong)
         
         // location of alert is user's current location
         let alertLoc2D = mapView.userLocation.coordinate;
@@ -108,17 +89,13 @@ class PatientAlertViewController: UIViewController, CLLocationManagerDelegate {
     
     func getAlert(){
         print("refreshing alert")
-        
         var components = URLComponents(string: self.appDelegate.endpoint+"/getAlert")!
         components.queryItems = [
-            URLQueryItem(name: "alertId", value: self.alert["_id"] as! String)
+            URLQueryItem(name: "alertId", value: self.appDelegate.alert!["_id"] as! String)
         ]
         components.percentEncodedQuery = components.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
         var request = URLRequest(url: components.url!)
-        
-        
         request.httpMethod = "GET"
-        
         
         URLSession.shared.dataTask(with:request, completionHandler: {(data, response, error) in
             guard let data = data, error == nil else {
@@ -130,10 +107,10 @@ class PatientAlertViewController: UIViewController, CLLocationManagerDelegate {
                 let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
                 print(json["status"]!)
                 if((json["status"]! as AnyObject).isEqual("success")){
-                    self.alert = json["alert"] as! [String:Any]
-                    self.doctor = json["doctor"] as! [String:Any]
+                    self.appDelegate.alert = json["alert"] as! [String:Any]
+                    self.appDelegate.doctor = json["doctor"] as! [String:Any]
                     
-                    if(self.alert["resolved"] as! Bool == true){
+                    if(self.appDelegate.alert!["resolved"] as! Bool == true){
                         self.timer?.invalidate()
                         DispatchQueue.main.async {
                             self.performSegue(withIdentifier: "resolvePatientAlertSegue", sender: self)
@@ -152,7 +129,7 @@ class PatientAlertViewController: UIViewController, CLLocationManagerDelegate {
     }
     @IBAction func resolveAlert(_ sender: Any) {
         let urlString = self.appDelegate.endpoint+"/resolveAlert"
-        let params: [String: Any] = ["alertId": self.alert["_id"] as! String]
+        let params: [String: Any] = ["alertId": self.appDelegate.alert!["_id"] as! String]
         
         let requestBody = try? JSONSerialization.data(withJSONObject: params)
         
@@ -179,7 +156,6 @@ class PatientAlertViewController: UIViewController, CLLocationManagerDelegate {
                     }
                 } else{
                     print("could not resolve alert")
-                    // should it still return to alert creation view if it fails?
                 }
                 
             } catch let error as NSError {
@@ -189,19 +165,10 @@ class PatientAlertViewController: UIViewController, CLLocationManagerDelegate {
         }).resume()
         
     }
+    
     @IBAction func editAlert(_ sender: Any) {
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "alertEditSegue", sender: self)
         }
     }
-    /*
-     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

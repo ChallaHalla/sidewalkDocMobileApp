@@ -24,17 +24,6 @@ class EditAlertViewController: UIViewController, UITableViewDataSource, CLLocati
     // selectedTags holds all the tags the user selects - this needs to be added to the alert
     var selectedTags: [String] = []
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let alertView = segue.destination as? PatientAlertViewController {
-            alertView.alert = self.alert
-            alertView.doctor = self.doctor
-        }
-        if let alertView = segue.destination as? PairAlertViewController {
-            alertView.alert = self.alert
-            alertView.doctor = self.doctor
-        }
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tags.count
     }
@@ -82,13 +71,12 @@ class EditAlertViewController: UIViewController, UITableViewDataSource, CLLocati
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.hideKeyboardWhenTappedAround()
-        print(self.alert)
+        
+        self.alert = self.appDelegate.alert!
+        self.doctor = self.appDelegate.doctor!
         self.selectedTags = self.alert["tags"] as! [String]
         self.desc.text = self.alert["description"] as! String
-        
-        
         
         locationManager.requestAlwaysAuthorization();
         locationManager.requestWhenInUseAuthorization();
@@ -149,7 +137,7 @@ class EditAlertViewController: UIViewController, UITableViewDataSource, CLLocati
                 let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
                 
                 if((json["status"]! as AnyObject).isEqual("success")){
-                    self.alert = (json["alert"] as? [String:Any])!
+                    self.appDelegate.alert = (json["alert"] as? [String:Any])!
                     DispatchQueue.main.async {
                         if self.presentingViewController is PatientAlertViewController{
                             self.performSegue(withIdentifier: "editAlertSegue", sender: self)

@@ -14,31 +14,26 @@ class AlertInfoViewController: UIViewController, CLLocationManagerDelegate {
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
-    var alert: [String:Any] = [:]
     var alertLocation: CLLocation = CLLocation(latitude: 0, longitude: 0)
     var doctorLocation: CLLocation = CLLocation(latitude: 0, longitude: 0)
     
-    let locationManager = CLLocationManager();
-    var alertMarker = MKPointAnnotation();
+    let locationManager = CLLocationManager()
+    var alertMarker = MKPointAnnotation()
+    var alert: [String:Any] = [:]
     
     @IBOutlet weak var distance: UILabel!
     @IBOutlet weak var descriptionText: UILabel!
     @IBOutlet weak var symptoms: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let alertView = segue.destination as? ResolveAlertViewController {
-            alertView.alert = self.alert
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        alert = appDelegate.alert!
         // Do any additional setup after loading the view.
         self.descriptionText.text = self.alert["description"] as! String;
         let tagsArr = self.alert["tags"] as? [String]
         self.symptoms.text = tagsArr!.joined(separator:", ")
-        self.alertLocation = CLLocation(latitude: self.alert["latitude"] as! CLLocationDegrees, longitude:self.alert["longitude"] as! CLLocationDegrees)
+        self.alertLocation = CLLocation(latitude:  self.alert["latitude"] as! CLLocationDegrees, longitude: self.alert["longitude"] as! CLLocationDegrees)
 //        distance converted to miles
         self.distance.text = String(format:"%.2f", doctorLocation.distance(from: alertLocation)*0.00062137) + " miles"
         
@@ -58,15 +53,8 @@ class AlertInfoViewController: UIViewController, CLLocationManagerDelegate {
     
     // https://developer.apple.com/documentation/corelocation/cllocationmanagerdelegate/1423615-locationmanager
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        /*
-         manager: "location manager obj that generated the update event"
-         locations: array of CLLocations. always contains at least 1 element representing current location.
-         if updates were deferred or multiple locations arrived before they could be delivered, array contains
-         additional entries (in order they occurred. most recent at the end).
-         */
         doctorLocation = locations[locations.endIndex - 1];
         updateDoctorLoc();
-        
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         NSLog(error.localizedDescription);
@@ -113,11 +101,9 @@ class AlertInfoViewController: UIViewController, CLLocationManagerDelegate {
     func respondToAlert(){
         
         print("trying to respond")
-        print(self.alert["_id"])
         let urlString = self.appDelegate.endpoint+"/respondToAlert"
         
-        
-        var params: [String: Any] = ["doctorId": self.appDelegate.userId as? String ,"alertId":self.alert["_id"]]
+        var params: [String: Any] = ["doctorId": self.appDelegate.userId as? String ,"alertId":  self.alert["_id"]]
         
         let requestBody = try? JSONSerialization.data(withJSONObject: params)
         
@@ -126,7 +112,6 @@ class AlertInfoViewController: UIViewController, CLLocationManagerDelegate {
         request.httpMethod = "POST"
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Accept")
-        
         
         URLSession.shared.dataTask(with:request, completionHandler: {(data, response, error) in
             guard let data = data, error == nil else {
@@ -144,18 +129,6 @@ class AlertInfoViewController: UIViewController, CLLocationManagerDelegate {
                         self.performSegue(withIdentifier: "resolveAlertSegue", sender: self)
                     }
                     
-//
-//                    if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!))
-//                    {
-//                        UIApplication.shared.openURL(NSURL(string:
-//                            "comgooglemaps://?saddr=&daddr=\(Float(self.alert["latitude"] as! CLLocationDegrees)),\(Float(self.alert["latitude"] as! CLLocationDegrees))&directionsmode=driving")! as URL)
-//                    } else
-//                    {
-//                        NSLog("Can't use com.google.maps://");
-//                        self.openTrackerInBrowser()
-//                    }
-                    
-                    
                 } else{
                     print("something went wrong")
                 }
@@ -164,17 +137,5 @@ class AlertInfoViewController: UIViewController, CLLocationManagerDelegate {
                 print(error)
             }
         }).resume()
-        
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

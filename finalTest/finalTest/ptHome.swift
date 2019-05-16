@@ -12,15 +12,17 @@ import CoreLocation
 class ptHome: UIViewController, UITableViewDataSource, CLLocationManagerDelegate, UITableViewDelegate {
     
     var alert: [String:Any] = [:]
+    
     let tags = ["Faint/no heartbeat", "Broken appendage", "Not breathing", "Heart attack", "Stroke", "Allergic reaction", "Car accident", "Fainting", "Heat stroke"]
-    // selectedTags holds all the tags the user selects - this needs to be added to the alert
     var selectedTags: [String] = []
+    
     let defaults = UserDefaults.standard
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let alertView = segue.destination as? PairAlertViewController {
-            alertView.alert = self.alert
-        }
-    }
+    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let locationManager = CLLocationManager();
+    var latitude = 0.0;
+    var longitude = 0.0;
+    @IBOutlet weak var desc: UITextView!
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tags.count
@@ -46,7 +48,6 @@ class ptHome: UIViewController, UITableViewDataSource, CLLocationManagerDelegate
         if tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCell.AccessoryType.checkmark
         {
             tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.none
-            
             if let index = selectedTags.index(of: tags[indexPath.row]) {
                 selectedTags.remove(at: index)
             }
@@ -57,23 +58,9 @@ class ptHome: UIViewController, UITableViewDataSource, CLLocationManagerDelegate
         }
     }
     
-    
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
-    let locationManager = CLLocationManager();
-    var latitude = 0.0;
-    var longitude = 0.0;
-
-    
-
-    @IBOutlet weak var desc: UITextView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.hideKeyboardWhenTappedAround()
-        
-        
         locationManager.requestAlwaysAuthorization();
         locationManager.requestWhenInUseAuthorization();
         if (CLLocationManager.locationServicesEnabled()) {
@@ -82,35 +69,15 @@ class ptHome: UIViewController, UITableViewDataSource, CLLocationManagerDelegate
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
             locationManager.startUpdatingLocation();
         }
-        // Input the data into the array
-        // Do any additional setup after loading the view.
-
         tableView.dataSource = self
         tableView.delegate = self
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        /*
-         manager: "location manager obj that generated the update event"
-         locations: array of CLLocations. always contains at least 1 element representing current location.
-         if updates were deferred or multiple locations arrived before they could be delivered, array contains
-         additional entries (in order they occurred. most recent at the end).
-         */
         let mostRecentLocationIndex = locations.count - 1;
         let lastKnownUserLocation = locations[mostRecentLocationIndex]
-        
         self.latitude = lastKnownUserLocation.coordinate.latitude
         self.longitude = lastKnownUserLocation.coordinate.longitude
-        
-        // when updated user location is received:
-        // if there is not a doctor on the way (AKA no active alert), recenter map on new user location
-        // if there is an active alert/doctor, recenter map between doctor info and new user info
-//        if (!activeAlert) {
-//            centerOnLocation(location: mapView.userLocation.coordinate);
-//        } else {
-//            updateDoctorLoc(docLocation: lastKnownDocLocation);
-//        }
-        
     }
     
     
@@ -121,15 +88,12 @@ class ptHome: UIViewController, UITableViewDataSource, CLLocationManagerDelegate
     @IBOutlet weak var tableView: UITableView!
     
     @IBAction func alertCreation(_ sender: Any) {
-        print(self.selectedTags)
-        createAlert()
+        self.createAlert()
     }
     
     func createAlert(){
         let urlString = self.appDelegate.endpoint+"/createAlert"
-        var params: [String: Any] = ["description": self.desc.text, "latitude": self.latitude, "longitude": self.longitude,
-        "userId": self.appDelegate.userId,
-        "tags":self.selectedTags as? [String]]
+        var params: [String: Any] = ["description": self.desc.text, "latitude": self.latitude, "longitude": self.longitude, "userId": self.appDelegate.userId, "tags":self.selectedTags as? [String]]
         
         let requestBody = try? JSONSerialization.data(withJSONObject: params)
         
@@ -139,18 +103,15 @@ class ptHome: UIViewController, UITableViewDataSource, CLLocationManagerDelegate
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Accept")
         
-        
         URLSession.shared.dataTask(with:request, completionHandler: {(data, response, error) in
             guard let data = data, error == nil else {
-                print("in guard")
                 return
             }
-            
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:Any]
                 
                 if((json["status"]! as AnyObject).isEqual("success")){
-                    self.alert = (json["alert"] as? [String:Any])!
+                    self.appDelegate.alert = (json["alert"] as? [String:Any])!
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "alertWaitSegue", sender: self)
                     }

@@ -27,7 +27,6 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.hideKeyboardWhenTappedAround()
         
-        self.appDelegate.checkCredentials = -1
         
         self.tryLogin()
     }
@@ -35,20 +34,11 @@ class ViewController: UIViewController {
     
     @IBAction func providerEnter(_ sender: Any) {
         login(userType: "provider", username: self.usernameInput.text!, password: self.passwordInput.text!)
-//        self.performSegue(withIdentifier: "providerSegue", sender: self)
-        
-        if self.appDelegate.checkCredentials == 1{
-            self.loginHeader.text = "Invalid credentials. Try again"
-        }
 
     }
     
     @IBAction func patientEnter(_ sender: Any) {
         login(userType: "patient", username: self.usernameInput.text!, password: self.passwordInput.text!)
-        
-        if self.appDelegate.checkCredentials == 1{
-            self.loginHeader.text = "Invalid credentials. Try again"
-        }
     }
     
     @IBAction func register(_ sender: Any) {
@@ -57,8 +47,6 @@ class ViewController: UIViewController {
     func login(userType:String, username:String, password:String){
         print("Perform login heres")
         let urlString = self.appDelegate.endpoint+"/login"
-        
-     
         var params: [String: Any] = ["username": username, "password": password]
         if(userType == "patient"){
             params["patient"] = "on"
@@ -98,7 +86,9 @@ class ViewController: UIViewController {
                     }
                 } else{
                     print("incorrect credentials")
-                    self.appDelegate.checkCredentials = 1
+                    DispatchQueue.main.async {
+                        self.loginHeader.text = "Invalid credentials. Try again"
+                    }
                     
                 }
             } catch let error as NSError {

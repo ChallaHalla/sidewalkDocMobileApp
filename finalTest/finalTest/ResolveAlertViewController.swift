@@ -24,7 +24,7 @@ class ResolveAlertViewController: UIViewController, CLLocationManagerDelegate {
     weak var timer: Timer?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.alert = self.appDelegate.alert!
         locationManager.requestAlwaysAuthorization();
         locationManager.requestWhenInUseAuthorization();
         if (CLLocationManager.locationServicesEnabled()) {
@@ -53,12 +53,7 @@ class ResolveAlertViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        /*
-         manager: "location manager obj that generated the update event"
-         locations: array of CLLocations. always contains at least 1 element representing current location.
-         if updates were deferred or multiple locations arrived before they could be delivered, array contains
-         additional entries (in order they occurred. most recent at the end).
-         */
+        
         let mostRecentLocationIndex = locations.count - 1;
         let lastKnownUserLocation = locations[mostRecentLocationIndex]
         

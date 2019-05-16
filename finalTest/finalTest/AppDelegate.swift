@@ -14,11 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var userId: String? = nil
     let endpoint = "http://172.22.90.82:3000"
+    var alert: [String:Any]? = nil
+    var doctor: [String:Any]? = nil
     
-    var checkCredentials = -1
-    var checkAccounts = -1
-
-
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         UIApplication.shared.setMinimumBackgroundFetchInterval(5)
@@ -26,11 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        print("BG FETCH")
         var vc = window?.rootViewController?.presentingViewController
         if vc is ResolveAlertViewController{
             vc = vc as! ResolveAlertViewController!
-            print("BG FETCH")
 //            vc.update()
         }
     }
